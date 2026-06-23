@@ -25,7 +25,7 @@ const CORE_SERVICE_SLUGS = [
 
 // Unsplash high-end wellness/therapy images specifically chosen for the treatments
 const serviceImages = {
-  "migraine-treatment": "/migra.png",
+  "migraine-treatment": "/mi.png",
   "headache-treatment": "https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&q=80&w=600",
   "disc-problems": "https://images.unsplash.com/photo-1579684389782-64d84b5e901a?auto=format&fit=crop&q=80&w=600",
   "shoulder-pain": "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&q=80&w=600",
