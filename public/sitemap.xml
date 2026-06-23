@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- Core pages -->
+  <url>
+    <loc>https://chirocareclinic.in/</loc>
+    <lastmod>2026-06-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://chirocareclinic.in/about</loc>
+    <lastmod>2026-06-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://chirocareclinic.in/services</loc>
+    <lastmod>2026-06-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://chirocareclinic.in/treatments</loc>
+    <lastmod>2026-06-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://chirocareclinic.in/gallery</loc>
+    <lastmod>2026-06-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://chirocareclinic.in/blog</loc>
+    <lastmod>2026-06-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://chirocareclinic.in/contact</loc>
+    <lastmod>2026-06-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Service detail pages -->
+  <url><loc>https://chirocareclinic.in/services/migraine-treatment</loc><priority>0.8</priority></url>
+  <url><loc>https://chirocareclinic.in/services/headache-treatment</loc><priority>0.8</priority></url>
+  <url><loc>https://chirocareclinic.in/services/disc-problems</loc><priority>0.8</priority></url>
+  <url><loc>https://chirocareclinic.in/services/shoulder-pain</loc><priority>0.8</priority></url>
+  <url><loc>https://chirocareclinic.in/services/sciatica</loc><priority>0.8</priority></url>
+  <url><loc>https://chirocareclinic.in/services/scoliosis</loc><priority>0.8</priority></url>
+  <url><loc>https://chirocareclinic.in/services/leg-length-measurement</loc><priority>0.8</priority></url>
+  <url><loc>https://chirocareclinic.in/services/cervical-spondylosis</loc><priority>0.8</priority></url>
+  <url><loc>https://chirocareclinic.in/services/whole-back-pain</loc><priority>0.8</priority></url>
+  <url><loc>https://chirocareclinic.in/services/whole-body-joint-pain</loc><priority>0.8</priority></url>
+  <url><loc>https://chirocareclinic.in/services/arthritis-management</loc><priority>0.8</priority></url>
+  <url><loc>https://chirocareclinic.in/services/neck-pain-treatment</loc><priority>0.8</priority></url>
+  <url><loc>https://chirocareclinic.in/services/sports-injury-recovery</loc><priority>0.8</priority></url>
+  <url><loc>https://chirocareclinic.in/services/stress-management</loc><priority>0.8</priority></url>
+  <url><loc>https://chirocareclinic.in/services/panchakarma-therapy</loc><priority>0.8</priority></url>
+
+  <!-- Treatment detail pages -->
+  <url><loc>https://chirocareclinic.in/treatments/panchakarma</loc><priority>0.8</priority></url>
+  <url><loc>https://chirocareclinic.in/treatments/abhyanga</loc><priority>0.8</priority></url>
+  <url><loc>https://chirocareclinic.in/treatments/kizhi-therapy</loc><priority>0.8</priority></url>
+  <url><loc>https://chirocareclinic.in/treatments/njavarakizhi</loc><priority>0.8</priority></url>
+  <url><loc>https://chirocareclinic.in/treatments/shirodhara</loc><priority>0.8</priority></url>
+  <url><loc>https://chirocareclinic.in/treatments/pizhichil</loc><priority>0.8</priority></url>
+  <url><loc>https://chirocareclinic.in/treatments/nasya</loc><priority>0.8</priority></url>
+  <url><loc>https://chirocareclinic.in/treatments/detox-programs</loc><priority>0.8</priority></url>
+  <url><loc>https://chirocareclinic.in/treatments/weight-management</loc><priority>0.8</priority></url>
+  <url><loc>https://chirocareclinic.in/treatments/skin-care</loc><priority>0.8</priority></url>
+
+  <!-- Blog article pages -->
+  <url><loc>https://chirocareclinic.in/blog/benefits-of-ayurveda</loc><priority>0.7</priority></url>
+  <url><loc>https://chirocareclinic.in/blog/chiropractic-care-explained</loc><priority>0.7</priority></url>
+  <url><loc>https://chirocareclinic.in/blog/managing-sciatica-naturally</loc><priority>0.7</priority></url>
+  <url><loc>https://chirocareclinic.in/blog/migraine-relief-tips</loc><priority>0.7</priority></url>
+  <url><loc>https://chirocareclinic.in/blog/joint-pain-solutions</loc><priority>0.7</priority></url>
+  <url><loc>https://chirocareclinic.in/blog/healthy-lifestyle-habits</loc><priority>0.7</priority></url>
+</urlset>

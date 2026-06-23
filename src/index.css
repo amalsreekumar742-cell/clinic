@@ -1,0 +1,197 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800;900&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #0088A9;       /* Teal */
+  --color-secondary: #00C7A0;     /* Turquoise */
+  --color-accent: #00C7A0;        /* Secondary/Turquoise mapped for markup compatibility */
+  --color-dark-accent: #005D73;   /* Dark Accent */
+  --color-text: #17332E;          /* Deep Teal Text */
+  --color-bg-primary: #F8FCFB;    /* Background */
+  --color-bg-secondary: #EEF8F6;  /* Section Background */
+  --color-charcoal: #17332E;      /* Premium Dark text color */
+
+  --font-serif: "Outfit", sans-serif;
+  --font-sans: "Inter", system-ui, sans-serif;
+}
+
+/* Global Adjustments */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--color-charcoal);
+  background-color: var(--color-bg-primary);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-serif);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 0.95;
+}
+
+/* Premium Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-bg-secondary);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-primary);
+  border-radius: 9999px;
+  border: 2px solid var(--color-bg-secondary);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-secondary);
+}
+
+/* Premium Glassmorphism Styles */
+.glass-card {
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  box-shadow: 0 8px 32px 0 rgba(0, 136, 169, 0.04);
+}
+
+.glass-card-hover {
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-card-hover:hover {
+  transform: translateY(-6px);
+  background: rgba(255, 255, 255, 0.85);
+  border-color: rgba(0, 199, 160, 0.4);
+  box-shadow: 0 20px 40px -15px rgba(0, 199, 160, 0.25);
+}
+
+.glass-card-dark {
+  background: rgba(0, 93, 115, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.15);
+}
+
+/* Text Gradient Effect */
+.text-gradient {
+  background: linear-gradient(135deg, var(--color-secondary), var(--color-primary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Primary Teal/Turquoise Gradient Background */
+.gradient-bg {
+  background: linear-gradient(135deg, var(--color-secondary), var(--color-primary));
+}
+
+/* Organic Floating Blobs */
+.blob-bg {
+  border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+}
+
+.blob-float-1 {
+  animation: float-blob-1 25s infinite alternate ease-in-out;
+}
+
+.blob-float-2 {
+  animation: float-blob-2 20s infinite alternate ease-in-out;
+}
+
+.blob-float-3 {
+  animation: float-blob-3 18s infinite alternate ease-in-out;
+}
+
+@keyframes float-blob-1 {
+  0% {
+    transform: translate(0px, 0px) scale(1) rotate(0deg);
+  }
+  33% {
+    transform: translate(30px, -50px) scale(1.1) rotate(120deg);
+  }
+  66% {
+    transform: translate(-20px, 20px) scale(0.95) rotate(240deg);
+  }
+  100% {
+    transform: translate(0px, 0px) scale(1) rotate(360deg);
+  }
+}
+
+@keyframes float-blob-2 {
+  0% {
+    transform: translate(0px, 0px) scale(1) rotate(0deg);
+  }
+  50% {
+    transform: translate(-40px, 60px) scale(1.15) rotate(-180deg);
+  }
+  100% {
+    transform: translate(0px, 0px) scale(1) rotate(0deg);
+  }
+}
+
+@keyframes float-blob-3 {
+  0% {
+    transform: translate(0px, 0px) scale(1) rotate(0deg);
+  }
+  40% {
+    transform: translate(50px, 30px) scale(0.9) rotate(90deg);
+  }
+  80% {
+    transform: translate(-30px, -30px) scale(1.1) rotate(270deg);
+  }
+  100% {
+    transform: translate(0px, 0px) scale(1) rotate(360deg);
+  }
+}
+
+/* Custom form elements */
+input, select, textarea {
+  border: 1px solid rgba(0, 199, 160, 0.15);
+  background-color: rgba(255, 255, 255, 0.6);
+  transition: all 0.3s ease;
+}
+input:focus, select:focus, textarea:focus {
+  border-color: var(--color-primary);
+  outline: none;
+  background-color: #ffffff;
+  box-shadow: 0 0 0 3px rgba(0, 136, 169, 0.15);
+}
+
+/* Swiper overrides */
+.swiper-pagination-bullet-active {
+  background: var(--color-primary) !important;
+  width: 20px !important;
+  border-radius: 5px !important;
+}
+
+/* Magnetic Button Lift and Glow */
+.btn-premium {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 15px rgba(0, 136, 169, 0.2);
+}
+
+.btn-premium:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 199, 160, 0.35);
+}
+
+.btn-premium-outline {
+  transition: all 0.3s ease;
+  border: 1px solid var(--color-primary);
+}
+
+.btn-premium-outline:hover {
+  background-color: var(--color-bg-secondary);
+  border-color: var(--color-secondary);
+}
+
+/* Luxury dark gradient */
+.gradient-luxury {
+  background: linear-gradient(135deg, var(--color-dark-accent), var(--color-primary));
+}
