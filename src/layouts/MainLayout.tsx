@@ -16,7 +16,7 @@ const MainLayout = () => {
   useEffect(() => {
     if (isLoading) return;
 
-    let timer;
+    let timer: ReturnType<typeof setTimeout> | undefined;
 
     const scrollToHash = () => {
       if (location.hash) {

@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import * as Icons from "lucide-react";
 import {
@@ -24,10 +24,10 @@ const CORE_SERVICE_SLUGS = [
 ];
 
 // Unsplash high-end wellness/therapy images specifically chosen for the treatments
-const serviceImages = {
-  "migraine-treatment": "/mi.png",
+const serviceImages: Record<string, string> = {
+  "migraine-treatment": "/migrainnnnn.png",
   "headache-treatment": "https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&q=80&w=600",
-  "disc-problems": "https://images.unsplash.com/photo-1579684389782-64d84b5e901a?auto=format&fit=crop&q=80&w=600",
+  "disc-problems": "https://images.unsplash.com/photo-1514672013381-c6d0df1c8b18?auto=format&fit=crop&q=80&w=600",
   "shoulder-pain": "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&q=80&w=600",
   "sciatica": "https://images.unsplash.com/photo-1519824145371-296894a0daa9?auto=format&fit=crop&q=80&w=600",
   "scoliosis": "https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&q=80&w=600",
@@ -42,7 +42,7 @@ const SpineBackgroundPattern = () => (
   <div className="absolute right-[5%] top-[120vh] w-32 h-[450vh] opacity-4 pointer-events-none z-0 hidden lg:block select-none">
     <svg className="w-full h-full" viewBox="0 0 100 1200" fill="none" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M 50,0 L 50,1200" stroke="#0088A9" strokeWidth="2.5" strokeDasharray="12 16" strokeLinecap="round" />
-      {Array.from({ length: 18 }).map((_, i) => (
+      {Array.from({ length: 18 }).map((_: any, i: number) => (
         <g key={i} transform={`translate(0, ${i * 65 + 60})`}>
           <circle cx="50" cy="10" r="5" fill="#00C7A0" />
           <path d="M 38,15 C 38,15 50,10 62,15 C 62,18 55,22 50,22 C 45,22 38,15 38,15 Z" fill="#0088A9" stroke="#ffffff" strokeWidth="1" />
@@ -52,17 +52,22 @@ const SpineBackgroundPattern = () => (
   </div>
 );
 
+interface AnimatedCounterProps {
+  value: string;
+  label: string;
+}
+
 // Scroll-triggered Counter Component for Trust bar
-const AnimatedCounter = ({ value, label }) => {
+const AnimatedCounter = ({ value, label }: AnimatedCounterProps) => {
   const [count, setCount] = useState(0);
-  const ref = useRef(null);
+  const ref = useRef<HTMLDivElement>(null);
   const numericValue = parseInt(value.replace(/\D/g, ""), 10);
   const suffix = value.replace(/\d/g, "");
 
   useEffect(() => {
-    let observer;
-    let startTime;
-    let animationFrame;
+    let observer: IntersectionObserver | undefined;
+    let startTime: number | null = null;
+    let animationFrame: number | undefined;
 
     if (ref.current) {
       observer = new IntersectionObserver(
@@ -70,8 +75,8 @@ const AnimatedCounter = ({ value, label }) => {
           if (entry.isIntersecting) {
             const duration = 2000; // 2 seconds
 
-            const animate = (timestamp) => {
-              if (!startTime) startTime = timestamp;
+            const animate = (timestamp: number) => {
+              if (startTime === null) startTime = timestamp;
               const progress = Math.min((timestamp - startTime) / duration, 1);
 
               // Cubic ease-out curve
@@ -87,7 +92,7 @@ const AnimatedCounter = ({ value, label }) => {
             };
 
             animationFrame = requestAnimationFrame(animate);
-            observer.disconnect();
+            if (observer) observer.disconnect();
           }
         },
         { threshold: 0.1 }
@@ -122,7 +127,7 @@ const AnimatedCounter = ({ value, label }) => {
 };
 
 const Home = () => {
-  const heroRef = useRef(null);
+  const heroRef = useRef<HTMLDivElement>(null);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isBookingOpen, setIsBookingOpen] = useState(false);
   const [isAllServicesOpen, setIsAllServicesOpen] = useState(false);
@@ -137,7 +142,7 @@ const Home = () => {
   });
 
   // Track cursor movement for subtle parallax in hero
-  const handleMouseMove = (e) => {
+  const handleMouseMove = (e: React.MouseEvent) => {
     if (!heroRef.current) return;
     const { clientX, clientY } = e;
     const { innerWidth, innerHeight } = window;
@@ -159,7 +164,7 @@ const Home = () => {
     return () => window.removeEventListener("open-booking-modal", handleOpenModal);
   }, []);
 
-  const handleBookingSubmit = (e) => {
+  const handleBookingSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
     // Construct formatted WhatsApp message
@@ -185,15 +190,75 @@ ${bookingData.message && bookingData.message.trim() ? `- Description: ${bookingD
   };
 
   // Filter out the 10 services of the clinic
-  const clinicServices = services.filter(s => CORE_SERVICE_SLUGS.includes(s.slug));
+  const clinicServices = services.filter((s: any) => CORE_SERVICE_SLUGS.includes(s.slug));
 
   // Choose the first 6 to showcase in the main grid
   const primaryServices = clinicServices.slice(0, 6);
 
+  // The remaining 4 services to show when expanded
+  const remainingServices = clinicServices.slice(6);
+
+  const renderServiceCard = (service: any) => {
+    const IconComponent = (Icons[service.iconName as keyof typeof Icons] || HelpCircle) as React.ComponentType<any>;
+    const imgUrl = serviceImages[service.slug];
+
+    return (
+      <div
+        key={service.id}
+        onClick={() => handleBookClick(service.title)}
+        className="relative overflow-hidden rounded-[2rem] bg-white border border-[#00C7A0]/10 shadow-sm hover:shadow-xl hover:border-[#00C7A0]/35 transition-all duration-400 flex flex-col h-full group hover:-translate-y-1.5 cursor-pointer"
+      >
+        {/* Reduced Card Image height by 30% */}
+        <div className="relative h-44 overflow-hidden">
+          <img
+            src={imgUrl}
+            alt={service.title}
+            className="w-full h-full object-cover group-hover:scale-103 transition-transform duration-700 pointer-events-none"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent pointer-events-none" />
+          <div className="absolute top-3 right-3 bg-white/95 backdrop-blur-md px-3 py-1.5 rounded-full text-[9px] font-extrabold text-[#0088A9] tracking-wider uppercase border border-white/50 shadow-sm">
+            {service.duration}
+          </div>
+        </div>
+
+        {/* Card Content with Improved Text Sizing and Styling */}
+        <div className="p-6 flex-grow flex flex-col justify-between text-left">
+          <div>
+            <div className="flex items-center gap-3 mb-4">
+              <div className="w-10 h-10 rounded-lg bg-[#EEF8F6] text-[#0088A9] flex items-center justify-center border border-[#00C7A0]/10 group-hover:bg-[#00C7A0] group-hover:text-white transition-all shrink-0">
+                <IconComponent className="w-5.5 h-5.5" />
+              </div>
+              <h3 className="font-serif text-xl md:text-2xl font-bold text-[#17332E] group-hover:text-[#0088A9] transition-colors leading-tight">
+                {service.title}
+              </h3>
+            </div>
+
+            {/* 3 Key Benefits with enlarged, readable text */}
+            <ul className="space-y-2 mt-4 mb-5">
+              {service.benefits.slice(0, 3).map((benefit: any, idx: number) => (
+                <li key={idx} className="flex items-start gap-2.5 text-xs md:text-sm text-[#17332E]/90 font-medium leading-relaxed">
+                  <CheckCircle className="w-4 h-4 text-[#00C7A0] shrink-0 mt-0.5" />
+                  <span>{benefit}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div
+            className="border-t border-[#00C7A0]/10 pt-4 flex items-center justify-between mt-auto w-full text-xs md:text-sm font-bold text-[#0088A9] group-hover:text-[#005D73] transition-colors text-left"
+          >
+            <span>Learn More</span>
+            <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform" />
+          </div>
+        </div>
+      </div>
+    );
+  };
+
   return (
     <>
       <SEO
-        title="Premium Chiropractic & Ayurvedic Care"
+        title="Chiro Care"
         description="CHIRO CARE AYURVEDIC CLINIC combines structural spine alignment with traditional Ayurvedic healing for long-term pain relief."
         canonicalPath=""
       />
@@ -215,7 +280,7 @@ ${bookingData.message && bookingData.message.trim() ? `- Description: ${bookingD
         <div className="absolute top-[30%] left-[30%] w-[500px] h-[500px] rounded-full pointer-events-none blob-float-3" style={{ background: "radial-gradient(circle, rgba(0,199,160,0.06) 0%, transparent 70%)" }} />
 
         {/* Floating particles */}
-        {[...Array(8)].map((_, i) => (
+        {[...Array(8)].map((_: any, i: number) => (
           <motion.div
             key={i}
             animate={{ y: [0, -20 - i * 5, 0], x: [0, (i % 2 === 0 ? 1 : -1) * (10 + i * 3), 0], opacity: [0.3, 0.7, 0.3] }}
@@ -498,72 +563,38 @@ ${bookingData.message && bookingData.message.trim() ? `- Description: ${bookingD
 
           {/* Core Services Cards Grid (2 cols mobile, 3 cols desktop) */}
           <div className="grid grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-            {primaryServices.map((service) => {
-              const IconComponent = Icons[service.iconName] || HelpCircle;
-              const imgUrl = serviceImages[service.slug];
-
-              return (
-                <div
-                  key={service.id}
-                  className="relative overflow-hidden rounded-[2rem] bg-white border border-[#00C7A0]/10 shadow-sm hover:shadow-xl hover:border-[#00C7A0]/35 transition-all duration-400 flex flex-col h-full group hover:-translate-y-1.5"
-                >
-                  {/* Reduced Card Image height by 30% */}
-                  <div className="relative h-44 overflow-hidden">
-                    <img
-                      src={imgUrl}
-                      alt={service.title}
-                      className="w-full h-full object-cover group-hover:scale-103 transition-transform duration-700 pointer-events-none"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent pointer-events-none" />
-                    <div className="absolute top-3 right-3 bg-white/95 backdrop-blur-md px-2.5 py-1 rounded-full text-[8px] font-extrabold text-[#0088A9] tracking-wider uppercase border border-white/50 shadow-sm">
-                      {service.duration}
-                    </div>
-                  </div>
-
-                  {/* Card Content with 50% Reduced Text */}
-                  <div className="p-6 flex-grow flex flex-col justify-between text-left">
-                    <div>
-                      <div className="flex items-center gap-3 mb-3">
-                        <div className="w-9 h-9 rounded-lg bg-[#EEF8F6] text-[#0088A9] flex items-center justify-center border border-[#00C7A0]/10 group-hover:bg-[#00C7A0] group-hover:text-white transition-all shrink-0">
-                          <IconComponent className="w-5 h-5" />
-                        </div>
-                        <h3 className="font-serif text-lg md:text-xl font-bold text-[#17332E] group-hover:text-[#0088A9] transition-colors leading-[0.95]">
-                          {service.title}
-                        </h3>
-                      </div>
-
-                      {/* 3 Key Benefits */}
-                      <ul className="space-y-1.5 mt-4 mb-4">
-                        {service.benefits.slice(0, 3).map((benefit, idx) => (
-                          <li key={idx} className="flex items-start gap-2 text-[11px] text-[#17332E]/85 font-medium leading-tight">
-                            <CheckCircle className="w-3.5 h-3.5 text-[#00C7A0] shrink-0 mt-0.5" />
-                            <span>{benefit}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-
-                    <button
-                      onClick={() => handleBookClick(service.title)}
-                      className="border-t border-[#00C7A0]/10 pt-4 flex items-center justify-between mt-auto w-full text-[11px] font-bold text-[#0088A9] hover:text-[#005D73] transition-colors cursor-pointer"
-                    >
-                      <span>Learn More</span>
-                      <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1.5 transition-transform" />
-                    </button>
-                  </div>
-                </div>
-              );
-            })}
+            {primaryServices.map((service: any) => renderServiceCard(service))}
           </div>
 
-          {/* Large CTA: View All Services (Triggers Drawer) */}
+          <AnimatePresence>
+            {isAllServicesOpen && (
+              <motion.div
+                key="remaining-services-grid"
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: "auto", opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
+                transition={{ duration: 0.5, ease: "easeInOut" }}
+                className="overflow-hidden w-full"
+              >
+                <div className="grid grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 pt-6 md:pt-8">
+                  {remainingServices.map((service: any) => renderServiceCard(service))}
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          {/* Large CTA: View All Services (Toggles Inline Grid Expansion) */}
           <div className="text-center mt-12">
             <button
-              onClick={() => setIsAllServicesOpen(true)}
+              onClick={() => setIsAllServicesOpen(!isAllServicesOpen)}
               className="inline-flex items-center gap-2 bg-gradient-to-r from-[#00C7A0] to-[#0088A9] text-white px-8 py-4.5 rounded-full font-extrabold text-xs uppercase tracking-widest shadow-md hover:shadow-lg transition-all cursor-pointer hover:-translate-y-0.5"
             >
-              View All Services
-              <ArrowRight className="w-4 h-4" />
+              {isAllServicesOpen ? "Show Less" : "View All Services"}
+              {isAllServicesOpen ? (
+                <Icons.ChevronUp className="w-4 h-4" />
+              ) : (
+                <Icons.ChevronDown className="w-4 h-4" />
+              )}
             </button>
           </div>
         </div>
@@ -584,7 +615,7 @@ ${bookingData.message && bookingData.message.trim() ? `- Description: ${bookingD
               className="absolute left-[5%] top-[10%] w-[55%] aspect-[3/4] rounded-[2.5rem] overflow-hidden shadow-2xl border-4 border-white/90 z-10"
             >
               <img
-                src="https://images.unsplash.com/photo-1579684389782-64d84b5e901a?auto=format&fit=crop&q=80&w=800"
+                src="https://images.unsplash.com/photo-1514672013381-c6d0df1c8b18?auto=format&fit=crop&q=80&w=800"
                 alt="Chiropractor performing spinal adjustment"
                 className="w-full h-full object-cover pointer-events-none"
               />
@@ -651,13 +682,13 @@ ${bookingData.message && bookingData.message.trim() ? `- Description: ${bookingD
 
             {/* Left Column: Doctor Portrait Frame (Dominating Image) */}
             <div className="lg:col-span-6 flex justify-center">
-              <div className="relative w-full max-w-[480px] aspect-[4/5] rounded-[3.5rem] bg-gradient-to-tr from-[#00C7A0] to-[#0088A9] overflow-hidden shadow-2xl border-[6px] border-white">
+              <div className="relative w-full max-w-[480px] aspect-[4/5] rounded-[3.5rem] bg-gradient-to-tr from-[#00C7A0]/15 to-[#0088A9]/15 overflow-hidden shadow-2xl border-[6px] border-white">
                 <img
                   src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&q=80&w=800"
                   alt="Lijomon MJ Lead Specialist"
-                  className="w-full h-full object-cover mix-blend-multiply opacity-90 pointer-events-none hover:scale-102 transition-transform duration-500"
+                  className="w-full h-full object-cover mix-blend-multiply opacity-[0.95] pointer-events-none hover:scale-102 transition-transform duration-500"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0088A9]/40 to-transparent pointer-events-none" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0088A9]/15 to-transparent pointer-events-none" />
               </div>
             </div>
 
@@ -803,7 +834,7 @@ ${bookingData.message && bookingData.message.trim() ? `- Description: ${bookingD
                 title="Chiro Care Clinic Location Map"
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3928.5630324838644!2d76.299104!3d10.003362!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b080d19f860bc3d%3A0xbc4e8e19b5e1b9b1!2sMetro+Pillar+567%2C+Banerji+Rd%2C+Kaloor%2C+Ernakulam%2C+Kochi%2C+Kerala+682017!5e0!3m2!1sen!2sin!4v1624445890123!5m2!1sen!2sin"
                 className="w-full h-full border-0 min-h-[350px]"
-                allowFullScreen=""
+                allowFullScreen={true}
                 loading="lazy"
               ></iframe>
             </div>
@@ -853,81 +884,6 @@ ${bookingData.message && bookingData.message.trim() ? `- Description: ${bookingD
         </div>
       </section>
 
-      {/* ==================== ALL SERVICES DRAWER ==================== */}
-      <AnimatePresence>
-        {isAllServicesOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-end bg-black/60 backdrop-blur-sm"
-            onClick={() => setIsAllServicesOpen(false)}
-          >
-            <motion.div
-              initial={{ x: "100%" }}
-              animate={{ x: 0 }}
-              exit={{ x: "100%" }}
-              transition={{ type: "spring", damping: 26, stiffness: 180 }}
-              className="w-full max-w-xl h-full bg-[#F8FCFB] shadow-2xl p-6 md:p-8 overflow-y-auto flex flex-col justify-between text-left"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <div>
-                <div className="flex justify-between items-center border-b border-[#00C7A0]/20 pb-4 mb-6">
-                  <h3 className="font-serif text-2xl md:text-3xl font-extrabold text-[#17332E]">
-                    All Healing Programs
-                  </h3>
-                  <button
-                    onClick={() => setIsAllServicesOpen(false)}
-                    className="p-1.5 rounded-full hover:bg-[#EEF8F6] text-[#17332E] transition-colors cursor-pointer"
-                  >
-                    <X className="w-6 h-6" />
-                  </button>
-                </div>
-
-                <div className="space-y-4">
-                  {clinicServices.map((service) => {
-                    const IconComponent = Icons[service.iconName] || HelpCircle;
-                    return (
-                      <div
-                        key={service.id}
-                        className="p-4.5 rounded-2xl bg-white border border-[#00C7A0]/10 hover:border-[#00C7A0]/30 transition-all flex gap-4 items-start shadow-sm"
-                      >
-                        <div className="w-9 h-9 rounded-xl bg-[#EEF8F6] text-[#0088A9] flex items-center justify-center shrink-0 border border-[#00C7A0]/10">
-                          <IconComponent className="w-5 h-5" />
-                        </div>
-                        <div>
-                          <h4 className="font-serif text-base font-bold text-[#17332E] leading-tight">{service.title}</h4>
-                          <p className="text-[11px] text-[#17332E]/70 mt-1 font-medium leading-relaxed">{service.shortDesc}</p>
-                          <div className="flex flex-wrap gap-1.5 mt-2.5">
-                            {service.benefits.slice(0, 2).map((benefit, idx) => (
-                              <span key={idx} className="text-[9px] bg-[#EEF8F6] text-[#0088A9] px-2 py-0.5 rounded-full font-bold">
-                                ✓ {benefit}
-                              </span>
-                            ))}
-                          </div>
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-
-              <div className="mt-8 border-t border-[#00C7A0]/20 pt-5 flex flex-col sm:flex-row gap-4 items-center justify-between">
-                <span className="text-[11px] text-[#17332E]/60 font-semibold uppercase tracking-wider">Natural Healing. Lasting Wellness.</span>
-                <button
-                  onClick={() => {
-                    setIsAllServicesOpen(false);
-                    handleBookClick("General Alignment");
-                  }}
-                  className="w-full sm:w-auto bg-gradient-to-r from-[#00C7A0] to-[#0088A9] text-white text-xs uppercase tracking-widest font-extrabold px-6 py-3.5 rounded-full shadow-md cursor-pointer"
-                >
-                  Book Appointment
-                </button>
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
 
       {/* ==================== PREMIUM BOOKING MODAL ==================== */}
       <AnimatePresence>
@@ -962,7 +918,7 @@ ${bookingData.message && bookingData.message.trim() ? `- Description: ${bookingD
                     Booking Confirmed!
                   </h3>
                   <p className="text-xs md:text-sm text-[#17332E]/70 max-w-sm leading-relaxed mt-2.5 font-semibold">
-                    Thank you. Dr. Lijomon MJ's assistant will call you on your provided number shortly to schedule your consultation slot.
+                    Thank you. Dr. Lijomon MJ's assistant will call you on your provided number shortlyf your consultation slot.
                   </p>
                   <button
                     onClick={() => {
@@ -1028,14 +984,14 @@ ${bookingData.message && bookingData.message.trim() ? `- Description: ${bookingD
                       onChange={(e) => setBookingData({ ...bookingData, service: e.target.value })}
                     >
                       <option value="">Select Treatment Required</option>
-                      {services.map((s) => (
+                      {services.map((s: any) => (
                         <option key={s.id} value={s.title}>{s.title}</option>
                       ))}
                     </select>
 
                     <textarea
                       placeholder="Brief description of symptoms (optional)"
-                      rows="3"
+                      rows={3}
                       className="w-full bg-white px-4 py-3.5 rounded-xl text-xs font-semibold"
                       value={bookingData.message}
                       onChange={(e) => setBookingData({ ...bookingData, message: e.target.value })}

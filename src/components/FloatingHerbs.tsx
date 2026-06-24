@@ -1,6 +1,16 @@
 import { motion } from "framer-motion";
 
-const Leaf = ({ delay, duration, startX, endX, startY, scale, rotate }) => {
+interface LeafProps {
+  delay: number;
+  duration: number;
+  startX: string;
+  endX: string;
+  startY: string;
+  scale: number;
+  rotate: number;
+}
+
+const Leaf = ({ delay, duration, startX, endX, startY, scale, rotate }: LeafProps) => {
   return (
     <motion.div
       initial={{ 

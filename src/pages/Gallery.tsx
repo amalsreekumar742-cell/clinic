@@ -1,11 +1,18 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ZoomIn } from "lucide-react";
 import SEO from "../seo/SEO";
 
+interface GalleryItem {
+  id: number;
+  category: string;
+  title: string;
+  img: string;
+}
+
 const Gallery = () => {
   const [selectedCategory, setSelectedCategory] = useState("All");
-  const [activeImage, setActiveImage] = useState(null);
+  const [activeImage, setActiveImage] = useState<GalleryItem | null>(null);
 
   const categories = ["All", "Clinic Rooms", "Treatments", "Herbal Pharmacy"];
 

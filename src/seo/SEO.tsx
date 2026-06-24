@@ -1,4 +1,15 @@
 import { Helmet } from "react-helmet-async";
+import { Blog } from "../types/Blog";
+
+interface SEOProps {
+  title?: string;
+  description?: string;
+  canonicalPath?: string;
+  ogType?: string;
+  ogImage?: string;
+  isBlogPost?: boolean;
+  blogData?: Blog | null;
+}
 
 const SEO = ({
   title = "Chiro Care Ayurvedic Clinic",
@@ -8,7 +19,7 @@ const SEO = ({
   ogImage = "https://chirocareclinic.in/og-image.jpg", // Production fallback url
   isBlogPost = false,
   blogData = null
-}) => {
+}: SEOProps) => {
   const siteUrl = "https://chirocareclinic.in";
   const canonicalUrl = `${siteUrl}${canonicalPath}`;
   const fullTitle = `${title} | Natural Healing. Lasting Wellness.`;
@@ -20,7 +31,7 @@ const SEO = ({
     "name": "Chiro Care Ayurvedic Clinic",
     "alternateName": "Chiro Care Clinic",
     "url": siteUrl,
-    "logo": `${siteUrl}/favicon.svg`,
+    "logo": `${siteUrl}/logo.png`,
     "image": ogImage,
     "description": description,
     "telephone": "+91-6282018754",
@@ -80,7 +91,7 @@ const SEO = ({
       "name": "Chiro Care Ayurvedic Clinic",
       "logo": {
         "@type": "ImageObject",
-        "url": `${siteUrl}/favicon.svg`
+        "url": `${siteUrl}/logo.png`
       }
     },
     "datePublished": new Date(blogData.date).toISOString(),

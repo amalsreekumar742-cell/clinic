@@ -1,10 +1,11 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import * as Icons from "lucide-react";
-import { Search, ArrowRight, HelpCircle } from "lucide-react";
+import { Search, ArrowRight, HelpCircle, Inbox } from "lucide-react";
 import SEO from "../seo/SEO";
 import { services } from "../data/services";
+import { Service } from "../types/Service";
 
 const Services = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -13,7 +14,7 @@ const Services = () => {
   const categories = ["All", "Spine & Disc", "Head & Neck", "Joints & Muscles", "Wellness & Detox"];
 
   // Helper function to match categories
-  const matchesCategory = (service, category) => {
+  const matchesCategory = (service: Service, category: string) => {
     if (category === "All") return true;
     
     const spineDiscIds = [3, 5, 6, 7, 9]; // Disc Problems, Sciatica, Scoliosis, Leg Length, Whole Back Pain
@@ -28,7 +29,7 @@ const Services = () => {
     return false;
   };
 
-  const filteredServices = services.filter((service) => {
+  const filteredServices = services.filter((service: any) => {
     const matchesSearch =
       service.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
       service.shortDesc.toLowerCase().includes(searchQuery.toLowerCase());
@@ -103,8 +104,8 @@ const Services = () => {
         <div className="max-w-7xl mx-auto">
           {filteredServices.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {filteredServices.map((service) => {
-                const IconComp = Icons[service.iconName] || HelpCircle;
+              {filteredServices.map((service: any) => {
+                const IconComp = (Icons[service.iconName as keyof typeof Icons] || HelpCircle) as React.ComponentType<any>;
                 return (
                   <motion.div
                     key={service.id}
@@ -137,7 +138,7 @@ const Services = () => {
             </div>
           ) : (
             <div className="text-center py-20 bg-white rounded-3xl border border-[#00C7A0]/10 shadow-sm max-w-lg mx-auto">
-              <Icons.Inbox className="w-16 h-16 text-[#00C7A0]/30 mx-auto mb-4" />
+              <Inbox className="w-16 h-16 text-[#00C7A0]/30 mx-auto mb-4" />
               <h3 className="font-serif text-2xl font-black text-[#17332E] mb-2">No Treatments Found</h3>
               <p className="text-xs md:text-sm text-[#17332E]/60 font-semibold">
                 Try searching for other terms or selecting a different category.

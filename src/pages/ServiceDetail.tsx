@@ -1,6 +1,7 @@
+import React from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import * as Icons from "lucide-react";
-import { ArrowLeft, Clock, AlertCircle, CheckCircle, ChevronRight, HelpCircle } from "lucide-react";
+import { ArrowLeft, Clock, AlertCircle, CheckCircle, ChevronRight, HelpCircle, Calendar, Phone, ArrowRight } from "lucide-react";
 import SEO from "../seo/SEO";
 import { services } from "../data/services";
 
@@ -24,7 +25,7 @@ const ServiceDetail = () => {
     );
   }
 
-  const IconComp = Icons[service.iconName] || HelpCircle;
+  const IconComp = (Icons[service.iconName as keyof typeof Icons] || HelpCircle) as React.ComponentType<any>;
 
   return (
     <>
@@ -136,14 +137,14 @@ const ServiceDetail = () => {
                     state={{ selectedService: service.title }} // Pass selected state
                     className="flex items-center justify-center gap-2 bg-gradient-to-r from-[#00C7A0] to-[#0088A9] text-white py-3.5 rounded-xl font-bold text-xs uppercase tracking-wider shadow-md shadow-[#00C7A0]/25 transition-all text-center"
                   >
-                    <Icons.Calendar className="w-4 h-4" />
+                    <Calendar className="w-4 h-4" />
                     Book Service Now
                   </Link>
                   <a
                     href="tel:+916282018754"
                     className="flex items-center justify-center gap-2 border border-[#0088A9]/20 text-[#0088A9] py-3.5 rounded-xl font-bold text-xs hover:bg-white transition-all text-center"
                   >
-                    <Icons.Phone className="w-3.5 h-3.5 text-[#00C7A0]" />
+                    <Phone className="w-3.5 h-3.5 text-[#00C7A0]" />
                     Call +91 6282018754
                   </a>
                 </div>
@@ -162,7 +163,7 @@ const ServiceDetail = () => {
                   className="text-[#00C7A0] hover:text-[#0088A9] font-bold inline-flex items-center gap-1.5 mt-1 transition-colors"
                 >
                   Chat on WhatsApp
-                  <Icons.ArrowRight className="w-3.5 h-3.5" />
+                  <ArrowRight className="w-3.5 h-3.5" />
                 </a>
               </div>
 

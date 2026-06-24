@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Phone, Mail, MapPin, Clock, CheckCircle2, MessageCircle } from "lucide-react";
@@ -11,14 +11,14 @@ const Contact = () => {
     name: "",
     phone: "",
     email: "",
-    service: location.state?.selectedService || "",
+    service: (location.state as any)?.selectedService || "",
     date: "",
     message: ""
   });
-  const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState<Record<string, string>>({});
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
     if (errors[name]) {
@@ -26,9 +26,9 @@ const Contact = () => {
     }
   };
 
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const tempErrors = {};
+    const tempErrors: Record<string, string> = {};
     if (!formData.name.trim()) tempErrors.name = "Full name is required";
     if (!formData.phone.trim()) tempErrors.phone = "Phone number is required";
     if (!formData.email.trim()) {
@@ -298,7 +298,7 @@ ${formData.message && formData.message.trim() ? `- Description: ${formData.messa
                     {/* Message */}
                     <textarea
                       name="message"
-                      rows="4"
+                      rows={4}
                       placeholder="Brief description of symptoms or request details (optional)"
                       value={formData.message}
                       onChange={handleInputChange}

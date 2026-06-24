@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Phone, Calendar } from "lucide-react";
@@ -7,6 +7,7 @@ import Logo from "./Logo";
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [activeHash, setActiveHash] = useState("#hero");
   const location = useLocation();
 
   useEffect(() => {
@@ -16,15 +17,50 @@ const Navbar = () => {
       } else {
         setIsScrolled(false);
       }
+
+      if (window.location.pathname === "/") {
+        const sections = ["hero", "about", "services", "doctor", "contact"];
+        const scrollPosition = window.scrollY + 120;
+
+        for (const section of sections) {
+          const el = document.getElementById(section);
+          if (el) {
+            const top = el.offsetTop;
+            const height = el.offsetHeight;
+            if (scrollPosition >= top && scrollPosition < top + height) {
+              setActiveHash(`#${section}`);
+              break;
+            }
+          }
+        }
+      }
     };
+
+    const handleHashChange = () => {
+      if (window.location.hash) {
+        setActiveHash(window.location.hash);
+      }
+    };
+
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener("hashchange", handleHashChange);
+
+    if (window.location.hash) {
+      setActiveHash(window.location.hash);
+    } else {
+      handleScroll();
+    }
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("hashchange", handleHashChange);
+    };
   }, []);
 
   const navLinks = [
     { name: "Home", path: "/#hero" },
-    { name: "About", path: "/#about" },
     { name: "Services", path: "/#services" },
+    { name: "About", path: "/#about" },
     { name: "Doctor", path: "/#doctor" },
     { name: "Contact", path: "/#contact" }
   ];
@@ -34,7 +70,7 @@ const Navbar = () => {
     setIsOpen(false);
   };
 
-  const handleLinkClick = (e, path) => {
+  const handleLinkClick = (e: React.MouseEvent, path: string) => {
     setIsOpen(false);
     if (location.pathname === "/" && path.startsWith("/#")) {
       const id = path.replace(/^\/#/, "");
@@ -49,6 +85,7 @@ const Navbar = () => {
           behavior: "smooth"
         });
         window.history.pushState(null, "", path);
+        setActiveHash(`#${id}`);
       }
     }
   };
@@ -73,9 +110,8 @@ const Navbar = () => {
             <div className="hidden lg:flex items-center gap-10">
               <div className="flex items-center gap-8">
                 {navLinks.map((link) => {
-                  const isActive =
-                    (link.path === "/#hero" && (location.hash === "" || location.hash === "#hero")) ||
-                    (location.hash && link.path.endsWith(location.hash));
+                  const targetHash = link.path.substring(link.path.indexOf("#"));
+                  const isActive = activeHash === targetHash;
                   
                   return (
                     <Link
@@ -152,9 +188,8 @@ const Navbar = () => {
           >
             <div className="px-5 pt-4 pb-8 space-y-3">
               {navLinks.map((link) => {
-                const isActive =
-                  (link.path === "/#hero" && (location.hash === "" || location.hash === "#hero")) ||
-                  (location.hash && link.path.endsWith(location.hash));
+                const targetHash = link.path.substring(link.path.indexOf("#"));
+                const isActive = activeHash === targetHash;
                 
                 return (
                   <Link

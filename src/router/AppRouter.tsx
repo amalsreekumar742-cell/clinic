@@ -13,7 +13,7 @@ const PageLoader = () => (
 );
 
 // Redirect sub-paths to the main landing page hash section
-const RedirectToHash = ({ hash }) => {
+const RedirectToHash = ({ hash }: { hash: string }) => {
   const navigate = useNavigate();
   useEffect(() => {
     navigate(`/#${hash}`, { replace: true });
