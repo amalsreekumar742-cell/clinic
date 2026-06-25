@@ -27,7 +27,7 @@ const CORE_SERVICE_SLUGS = [
 const serviceImages: Record<string, string> = {
   "migraine-treatment": "/migrainnnnn.png",
   "headache-treatment": "https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&q=80&w=600",
-  "disc-problems": "https://images.unsplash.com/photo-1514672013381-c6d0df1c8b18?auto=format&fit=crop&q=80&w=600",
+  "disc-problems": "/disc.png",
   "shoulder-pain": "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&q=80&w=600",
   "sciatica": "https://images.unsplash.com/photo-1519824145371-296894a0daa9?auto=format&fit=crop&q=80&w=600",
   "scoliosis": "https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&q=80&w=600",
@@ -208,7 +208,7 @@ ${bookingData.message && bookingData.message.trim() ? `- Description: ${bookingD
         onClick={() => handleBookClick(service.title)}
         className="relative overflow-hidden rounded-[2rem] bg-white border border-[#00C7A0]/10 shadow-sm hover:shadow-xl hover:border-[#00C7A0]/35 transition-all duration-400 flex flex-col h-full group hover:-translate-y-1.5 cursor-pointer"
       >
-        {/* Reduced Card Image height by 30% */}
+        {/* Increased Card Image height to show more of the image down */}
         <div className="relative h-44 overflow-hidden">
           <img
             src={imgUrl}
@@ -268,7 +268,7 @@ ${bookingData.message && bookingData.message.trim() ? `- Description: ${bookingD
         ref={heroRef}
         onMouseMove={handleMouseMove}
         id="hero"
-        className="relative min-h-screen flex flex-col justify-center pt-20 pb-0 overflow-hidden select-none"
+        className="relative min-h-fit lg:min-h-screen flex flex-col lg:justify-center pt-20 pb-0 overflow-hidden select-none"
         style={{ background: "linear-gradient(135deg, #0a1628 0%, #0d2137 40%, #0a2a2a 100%)" }}
       >
         {/* Noise texture overlay for depth */}
@@ -300,9 +300,9 @@ ${bookingData.message && bookingData.message.trim() ? `- Description: ${bookingD
         {/* Diagonal accent line */}
         <div className="absolute top-0 right-[35%] w-px h-full opacity-10 pointer-events-none" style={{ background: "linear-gradient(to bottom, transparent, rgba(0,199,160,0.8), transparent)" }} />
 
-        <div className="max-w-7xl mx-auto px-4 md:px-8 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center relative z-10 w-full py-12 lg:py-0">
+        <div className="max-w-7xl mx-auto px-4 md:px-8 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center relative z-10 w-full pt-1 pb-8 lg:py-0">
           {/* Left Column Content */}
-          <div className="lg:col-span-6 flex flex-col items-start gap-5 text-left">
+          <div className="lg:col-span-6 flex flex-col items-start gap-3.5 sm:gap-4 md:gap-5 text-left">
 
             {/* Premium Badge */}
             <motion.div
@@ -546,10 +546,10 @@ ${bookingData.message && bookingData.message.trim() ? `- Description: ${bookingD
       </motion.section>
 
       {/* ==================== 3. OUR SERVICES ==================== */}
-      <section id="services" className="py-24 bg-[#EEF8F6]/30 px-4 md:px-8 relative z-10 select-none">
+      <section id="services" className="py-8 md:py-16 lg:py-24 bg-[#EEF8F6]/30 px-4 md:px-8 relative z-10 select-none">
         <div className="max-w-7xl mx-auto">
           {/* Section Header */}
-          <div className="text-center max-w-3xl mx-auto mb-16">
+          <div className="text-center max-w-3xl mx-auto mb-8 md:mb-12 lg:mb-16">
             <span className="text-xs uppercase tracking-[0.25em] font-extrabold text-[#0088A9] block mb-3">
               Core Healing Programs
             </span>
@@ -561,8 +561,8 @@ ${bookingData.message && bookingData.message.trim() ? `- Description: ${bookingD
             </p>
           </div>
 
-          {/* Core Services Cards Grid (2 cols mobile, 3 cols desktop) */}
-          <div className="grid grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+          {/* Core Services Cards Grid (1 col mobile, 2 cols tablet, 3 cols desktop) */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
             {primaryServices.map((service: any) => renderServiceCard(service))}
           </div>
 
@@ -576,7 +576,7 @@ ${bookingData.message && bookingData.message.trim() ? `- Description: ${bookingD
                 transition={{ duration: 0.5, ease: "easeInOut" }}
                 className="overflow-hidden w-full"
               >
-                <div className="grid grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 pt-6 md:pt-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 pt-6 md:pt-8">
                   {remainingServices.map((service: any) => renderServiceCard(service))}
                 </div>
               </motion.div>
@@ -584,7 +584,7 @@ ${bookingData.message && bookingData.message.trim() ? `- Description: ${bookingD
           </AnimatePresence>
 
           {/* Large CTA: View All Services (Toggles Inline Grid Expansion) */}
-          <div className="text-center mt-12">
+          <div className="text-center mt-6 md:mt-10 lg:mt-12">
             <button
               onClick={() => setIsAllServicesOpen(!isAllServicesOpen)}
               className="inline-flex items-center gap-2 bg-gradient-to-r from-[#00C7A0] to-[#0088A9] text-white px-8 py-4.5 rounded-full font-extrabold text-xs uppercase tracking-widest shadow-md hover:shadow-lg transition-all cursor-pointer hover:-translate-y-0.5"
@@ -601,11 +601,11 @@ ${bookingData.message && bookingData.message.trim() ? `- Description: ${bookingD
       </section>
 
       {/* ==================== 4. ABOUT CHIRO CARE ==================== */}
-      <section id="about" className="py-24 bg-white px-4 md:px-8 relative z-10 select-none border-t border-[#EEF8F6]">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+      <section id="about" className="py-8 md:py-16 lg:py-24 bg-white px-4 md:px-8 relative z-10 select-none border-t border-[#EEF8F6]">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center">
 
           {/* Left Column: Overlapping Images Collage (30% larger visual weight) */}
-          <div className="lg:col-span-6 relative h-[450px] sm:h-[520px] w-full mt-8 lg:mt-0">
+          <div className="lg:col-span-6 relative h-[340px] sm:h-[420px] md:h-[500px] w-full mt-6 lg:mt-0">
             {/* Soft glowing background element */}
             <div className="absolute inset-0 bg-[#0088A9]/5 rounded-full blur-3xl -z-10 scale-90" />
 
@@ -676,9 +676,9 @@ ${bookingData.message && bookingData.message.trim() ? `- Description: ${bookingD
       </section>
 
       {/* ==================== 5. MEET OUR DOCTOR ==================== */}
-      <section id="doctor" className="py-24 bg-[#EEF8F6]/30 px-4 md:px-8 relative z-10 border-t border-[#EEF8F6] select-none">
+      <section id="doctor" className="py-8 md:py-16 lg:py-24 bg-[#EEF8F6]/30 px-4 md:px-8 relative z-10 border-t border-[#EEF8F6] select-none">
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center">
 
             {/* Left Column: Doctor Portrait Frame (Dominating Image) */}
             <div className="lg:col-span-6 flex justify-center">
@@ -746,10 +746,10 @@ ${bookingData.message && bookingData.message.trim() ? `- Description: ${bookingD
       </section>
 
       {/* ==================== 6. LOCATION & CONTACT ==================== */}
-      <section id="contact" className="py-24 bg-white px-4 md:px-8 relative z-10 border-t border-[#EEF8F6] overflow-hidden select-none">
+      <section id="contact" className="py-8 md:py-16 lg:py-24 bg-white px-4 md:px-8 relative z-10 border-t border-[#EEF8F6] overflow-hidden select-none">
         <div className="max-w-7xl mx-auto">
           {/* Header */}
-          <div className="text-center max-w-3xl mx-auto mb-16">
+          <div className="text-center max-w-3xl mx-auto mb-8 md:mb-12 lg:mb-16">
             <span className="text-xs uppercase tracking-[0.25em] font-extrabold text-[#0088A9] block mb-3">
               Visit Center
             </span>
@@ -758,9 +758,9 @@ ${bookingData.message && bookingData.message.trim() ? `- Description: ${bookingD
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-stretch">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 lg:items-stretch">
             {/* Left Column: Contact Cards */}
-            <div className="lg:col-span-5 flex flex-col gap-6 justify-between text-left">
+            <div className="lg:col-span-5 flex flex-col gap-6 lg:justify-between justify-start text-left">
               <div className="flex flex-col gap-4">
                 <a
                   href="https://maps.google.com/?q=10.003362,76.299104"
@@ -832,7 +832,7 @@ ${bookingData.message && bookingData.message.trim() ? `- Description: ${bookingD
               {/* Working Google Map Embed Frame */}
               <iframe
                 title="Chiro Care Clinic Location Map"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3928.5630324838644!2d76.299104!3d10.003362!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b080d19f860bc3d%3A0xbc4e8e19b5e1b9b1!2sMetro+Pillar+567%2C+Banerji+Rd%2C+Kaloor%2C+Ernakulam%2C+Kochi%2C+Kerala+682017!5e0!3m2!1sen!2sin!4v1624445890123!5m2!1sen!2sin"
+                src="https://maps.google.com/maps?q=10.003362,76.299104&z=17&output=embed"
                 className="w-full h-full border-0 min-h-[350px]"
                 allowFullScreen={true}
                 loading="lazy"
@@ -843,11 +843,11 @@ ${bookingData.message && bookingData.message.trim() ? `- Description: ${bookingD
       </section>
 
       {/* ==================== 7. CONSULTATION CTA ==================== */}
-      <section className="py-20 bg-gradient-to-br from-[#005D73] to-[#0088A9] text-white select-none border-t border-[#EEF8F6] relative z-10 overflow-hidden">
+      <section className="py-8 md:py-16 bg-gradient-to-br from-[#005D73] to-[#0088A9] text-white select-none border-t border-[#EEF8F6] relative z-10 overflow-hidden">
         <div className="absolute right-0 top-0 w-80 h-80 rounded-full bg-[#00C7A0]/10 blur-[75px] pointer-events-none" />
 
         <div className="max-w-7xl mx-auto px-4 md:px-8">
-          <div className="bg-[#EEF8F6]/5 rounded-[3rem] border border-white/10 relative overflow-hidden p-8 md:p-14 shadow-2xl">
+          <div className="bg-[#EEF8F6]/5 rounded-[3rem] border border-white/10 relative overflow-hidden p-6 md:p-14 shadow-2xl">
             <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center text-left">
               {/* Text */}
               <div className="lg:col-span-8 flex flex-col gap-2">

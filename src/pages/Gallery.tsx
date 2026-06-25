@@ -14,7 +14,7 @@ const Gallery = () => {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [activeImage, setActiveImage] = useState<GalleryItem | null>(null);
 
-  const categories = ["All", "Clinic Rooms", "Treatments", "Herbal Pharmacy"];
+  const categories = ["All", "Clinic Rooms", "Treatments"];
 
   const galleryItems = [
     {
@@ -31,36 +31,24 @@ const Gallery = () => {
     },
     {
       id: 3,
-      category: "Herbal Pharmacy",
-      title: "Traditional Medicated Oils",
-      img: "https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?auto=format&fit=crop&q=80&w=800"
-    },
-    {
-      id: 4,
       category: "Clinic Rooms",
       title: "Zen Recovery Lounge",
       img: "https://images.unsplash.com/photo-1519824145371-296894a0daa9?auto=format&fit=crop&q=80&w=800"
     },
     {
-      id: 5,
+      id: 4,
       category: "Treatments",
       title: "Chiropractic Spinal Correction",
       img: "https://images.unsplash.com/photo-1579684389782-64d84b5e901a?auto=format&fit=crop&q=80&w=800"
     },
     {
-      id: 6,
-      category: "Herbal Pharmacy",
-      title: "Crushed Ayurvedic Herbs",
-      img: "https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?auto=format&fit=crop&q=80&w=800"
-    },
-    {
-      id: 7,
+      id: 5,
       category: "Clinic Rooms",
       title: "Reception Area",
       img: "https://images.unsplash.com/photo-1527613426441-4da17471b66d?auto=format&fit=crop&q=80&w=800"
     },
     {
-      id: 8,
+      id: 6,
       category: "Treatments",
       title: "Warm Herbal Kizhi Bolus",
       img: "https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&q=80&w=800"
@@ -75,7 +63,7 @@ const Gallery = () => {
     <>
       <SEO 
         title="Clinic Gallery" 
-        description="Take a visual tour of Chiro Care Ayurvedic Clinic, featuring our treatment rooms, chiropractic setups, herbal pharmacy, and wellness lounges."
+        description="Take a visual tour of Chiro Care Ayurvedic Clinic, featuring our treatment rooms, chiropractic setups, and wellness lounges."
         canonicalPath="/gallery"
       />
 
@@ -92,7 +80,7 @@ const Gallery = () => {
             Clinic Gallery
           </h1>
           <p className="text-xs sm:text-sm md:text-base text-white/80 max-w-xl mx-auto leading-relaxed font-semibold mt-1">
-            Browse high-definition photography showcasing our clean, peaceful, and fully equipped therapy spaces, herbal pharmacy, and clinical rooms.
+            Browse high-definition photography showcasing our clean, peaceful, and fully equipped therapy spaces and clinical rooms.
           </p>
         </div>
       </section>
@@ -200,7 +188,7 @@ const Gallery = () => {
                   onClick={() => setActiveImage(null)}
                   className="mt-8 bg-gradient-to-r from-[#00C7A0] to-[#0088A9] hover:opacity-95 text-white py-3.5 rounded-xl font-bold text-xs uppercase tracking-wider transition-colors w-full text-center shadow-md shadow-[#00C7A0]/25"
                 >
-                  Close Lightbox
+                  Close
                 </button>
               </div>
             </motion.div>

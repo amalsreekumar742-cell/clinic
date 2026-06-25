@@ -62,6 +62,7 @@ const Navbar = () => {
     { name: "Services", path: "/#services" },
     { name: "About", path: "/#about" },
     { name: "Doctor", path: "/#doctor" },
+    { name: "Gallery", path: "/gallery" },
     { name: "Contact", path: "/#contact" }
   ];
 
@@ -110,8 +111,10 @@ const Navbar = () => {
             <div className="hidden lg:flex items-center gap-10">
               <div className="flex items-center gap-8">
                 {navLinks.map((link) => {
-                  const targetHash = link.path.substring(link.path.indexOf("#"));
-                  const isActive = activeHash === targetHash;
+                  const isHashLink = link.path.includes("#");
+                  const isActive = isHashLink
+                    ? (location.pathname === "/" && activeHash === link.path.substring(link.path.indexOf("#")))
+                    : location.pathname === link.path;
                   
                   return (
                     <Link
@@ -188,8 +191,10 @@ const Navbar = () => {
           >
             <div className="px-5 pt-4 pb-8 space-y-3">
               {navLinks.map((link) => {
-                const targetHash = link.path.substring(link.path.indexOf("#"));
-                const isActive = activeHash === targetHash;
+                const isHashLink = link.path.includes("#");
+                const isActive = isHashLink
+                  ? (location.pathname === "/" && activeHash === link.path.substring(link.path.indexOf("#")))
+                  : location.pathname === link.path;
                 
                 return (
                   <Link

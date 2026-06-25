@@ -4,6 +4,7 @@ import MainLayout from "../layouts/MainLayout";
 
 // Lazy Load Pages
 const Home = lazy(() => import("../pages/Home"));
+const Gallery = lazy(() => import("../pages/Gallery"));
 
 // Page transition chunk loading spinner
 const PageLoader = () => (
@@ -27,6 +28,9 @@ const AppRouter = () => {
       <Routes>
         <Route path="/" element={<MainLayout />}>
           <Route index element={<Home />} />
+          
+          {/* Standalone Pages */}
+          <Route path="gallery" element={<Gallery />} />
           
           {/* Sub-paths redirect to corresponding single-page hash sections */}
           <Route path="about" element={<RedirectToHash hash="about" />} />

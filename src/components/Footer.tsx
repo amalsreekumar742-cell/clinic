@@ -23,8 +23,7 @@ const InstagramIcon = ({ className }: SocialIconProps) => (
 
 const YoutubeIcon = ({ className }: SocialIconProps) => (
   <svg className={className} viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-    <path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z" />
-    <polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="white" />
+    <path fillRule="evenodd" clipRule="evenodd" d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z M9.75 8.98l5.75 3.02-5.75 3.02V8.98z" />
   </svg>
 );
 
@@ -42,6 +41,7 @@ const Footer = () => {
     { name: "Home", path: "/#hero" },
     { name: "About Chiro Care", path: "/#about" },
     { name: "Meet Our Doctor", path: "/#doctor" },
+    { name: "Clinic Gallery", path: "/gallery" },
     { name: "Location & Coordinates", path: "/#contact" }
   ];
 
