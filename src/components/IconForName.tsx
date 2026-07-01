@@ -1,0 +1,47 @@
+import type { ComponentType } from "react";
+import {
+  Activity,
+  Bone,
+  Brain,
+  BrainCircuit,
+  CircleDot,
+  Disc3,
+  Dumbbell,
+  Footprints,
+  GitMerge,
+  Grid,
+  HandHeart,
+  HeartPulse,
+  HelpCircle,
+  Ruler,
+  Scale,
+  ShieldAlert,
+  Smile,
+  SmilePlus,
+  Sparkles,
+  Zap,
+} from "lucide-react";
+
+const iconMap: Record<string, ComponentType<{ className?: string }>> = {
+  Activity,
+  Bone,
+  Brain,
+  BrainCircuit,
+  CircleDot,
+  Disc3,
+  Dumbbell,
+  Footprints,
+  GitMerge,
+  Grid,
+  HandHeart,
+  HeartPulse,
+  Ruler,
+  Scale,
+  ShieldAlert,
+  Smile,
+  SmilePlus,
+  Sparkles,
+  Zap,
+};
+
+export const getIconForName = (iconName: string) => iconMap[iconName] || HelpCircle;

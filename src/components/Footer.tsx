@@ -29,20 +29,22 @@ const YoutubeIcon = ({ className }: SocialIconProps) => (
 
 const Footer = () => {
   const servicesLinks = [
-    { name: "Migraine Treatment", path: "/#services" },
-    { name: "Sciatica Relief", path: "/#services" },
-    { name: "Disc Problems", path: "/#services" },
-    { name: "Cervical Spondylosis", path: "/#services" },
-    { name: "Whole Back Pain", path: "/#services" },
-    { name: "Posture Correction", path: "/#services" }
+    { name: "Migraine Treatment", path: "/services/migraine-treatment" },
+    { name: "Sciatica Relief", path: "/services/sciatica" },
+    { name: "Disc Problems", path: "/services/disc-problems" },
+    { name: "Cervical Spondylosis", path: "/services/cervical-spondylosis" },
+    { name: "Whole Back Pain", path: "/services/whole-back-pain" },
+    { name: "Panchakarma", path: "/treatments/panchakarma" }
   ];
 
   const quickLinks = [
     { name: "Home", path: "/#hero" },
     { name: "About Chiro Care", path: "/#about" },
     { name: "Meet Our Doctor", path: "/#doctor" },
+    { name: "Ayurvedic Treatments", path: "/treatments" },
+    { name: "Health Blog", path: "/blog" },
     { name: "Clinic Gallery", path: "/gallery" },
-    { name: "Location & Coordinates", path: "/#contact" }
+    { name: "Contact Page", path: "/contact" }
   ];
 
   const handleLinkClick = (path: string) => {
@@ -120,7 +122,7 @@ const Footer = () => {
               <div className="flex flex-col gap-2">
                 <a href="tel:+919778084638" className="flex items-center gap-2 hover:text-[#00C7A0]">
                   <Phone className="w-3.5 h-3.5 text-[#00C7A0] shrink-0" />
-                  Dr. Lijomon: +91 9778084638
+                  Lijomon MJ: +91 9778084638
                 </a>
                 <a href="tel:+917902361210" className="flex items-center gap-2 hover:text-[#00C7A0]">
                   <Phone className="w-3.5 h-3.5 text-[#00C7A0] shrink-0" />

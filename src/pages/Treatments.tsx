@@ -8,8 +8,8 @@ const Treatments = () => {
   return (
     <>
       <SEO 
-        title="Ayur Treatments" 
-        description="Explore our traditional Ayurvedic treatments: Panchakarma, Shirodhara, Abhyanga, Pizhichil, and custom detox plans."
+        title="Panchakarma and Ayurvedic Treatments in Kerala" 
+        description="Explore Ayurvedic therapies at Chiro Care Ayurvedic Clinic in Kerala, including Panchakarma, Shirodhara, Abhyanga, Kizhi, Nasya, detox programs, and weight management."
         canonicalPath="/treatments"
       />
 

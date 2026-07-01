@@ -1,0 +1,27 @@
+{
+  "name": "Chiro Care Ayurvedic Clinic",
+  "short_name": "Chiro Care",
+  "description": "Ayurveda-informed chiropractic clinic in Kaloor, Ernakulam for back pain, neck pain, migraine, sciatica, joint pain, and Panchakarma wellness.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#F8FCFB",
+  "theme_color": "#0088A9",
+  "categories": ["health", "medical", "lifestyle"],
+  "lang": "en-IN",
+  "icons": [
+    {
+      "src": "/logo.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

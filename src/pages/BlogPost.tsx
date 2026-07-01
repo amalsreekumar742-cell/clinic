@@ -2,6 +2,7 @@ import { useParams, Link, useNavigate } from "react-router-dom";
 import { ArrowLeft, Clock, Calendar, User, ChevronRight, AlertCircle, Share2, CheckCircle } from "lucide-react";
 import SEO from "../seo/SEO";
 import { blogs } from "../data/blogs";
+import { getBreadcrumbSchema } from "../seo/site";
 
 const BlogPost = () => {
   const { slug } = useParams();
@@ -31,6 +32,13 @@ const BlogPost = () => {
         canonicalPath={`/blog/${post.slug}`}
         isBlogPost={true}
         blogData={post}
+        schemas={[
+          getBreadcrumbSchema([
+            { name: "Home", path: "/" },
+            { name: "Blog", path: "/blog" },
+            { name: post.title, path: `/blog/${post.slug}` },
+          ]),
+        ]}
       />
 
       {/* Breadcrumbs */}

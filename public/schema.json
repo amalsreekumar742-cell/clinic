@@ -1,0 +1,43 @@
+{
+  "@context": "https://schema.org",
+  "@type": ["MedicalClinic", "LocalBusiness"],
+  "@id": "https://chirocareclinic.in/#clinic",
+  "name": "Chiro Care Ayurvedic Clinic",
+  "alternateName": "Chiro Care Clinic",
+  "url": "https://chirocareclinic.in",
+  "logo": "https://chirocareclinic.in/logo.png",
+  "image": "https://chirocareclinic.in/logo.png",
+  "description": "Ayurveda-informed chiropractic clinic in Kaloor, Ernakulam for back pain, neck pain, migraine, sciatica, disc problems, joint pain, and Panchakarma wellness.",
+  "telephone": "+91-6282018754",
+  "email": "info@chirocareclinic.in",
+  "priceRange": "$$",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "BRRA 46, Bank Road, Metro pillar 567, Avenue 5th, Kaloor",
+    "addressLocality": "Ernakulam",
+    "addressRegion": "Kerala",
+    "postalCode": "682017",
+    "addressCountry": "IN"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 10.003362,
+    "longitude": 76.299104
+  },
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+      "opens": "09:00",
+      "closes": "20:00"
+    },
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": "Sunday",
+      "opens": "09:00",
+      "closes": "14:00"
+    }
+  ],
+  "areaServed": ["Kaloor", "Ernakulam", "Kochi", "Kerala", "India"],
+  "medicalSpecialty": ["Ayurvedic", "Chiropractic", "PainManagement"]
+}

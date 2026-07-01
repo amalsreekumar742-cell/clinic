@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { Phone, Mail, MapPin, Clock, CheckCircle2, MessageCircle } from "lucide-react";
+import { Phone, Mail, MapPin, Clock, CheckCircle2 } from "lucide-react";
 import SEO from "../seo/SEO";
 import { services } from "../data/services";
 
@@ -70,8 +70,8 @@ ${formData.message && formData.message.trim() ? `- Description: ${formData.messa
   return (
     <>
       <SEO 
-        title="Contact Us" 
-        description="Book your appointment at Chiro Care Ayurvedic Clinic. Get clinic addresses, directions, calling numbers, and operational hours."
+        title="Contact Ayurvedic Clinic in Kaloor Ernakulam" 
+        description="Book an appointment at Chiro Care Ayurvedic Clinic in Kaloor, Ernakulam. Get directions, phone numbers, WhatsApp booking, clinic address, and working hours."
         canonicalPath="/contact"
       />
 

@@ -1,15 +1,15 @@
-import { useState, useEffect } from "react";
+import { Suspense, useState, useEffect } from "react";
 import { Outlet, useLocation } from "react-router-dom";
-import { AnimatePresence, motion } from "framer-motion";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import ScrollProgress from "../components/ScrollProgress";
 import FloatingHerbs from "../components/FloatingHerbs";
 import LoadingScreen from "../components/LoadingScreen";
 import WhatsAppButton from "../components/WhatsAppButton";
+import { AnimatePresence } from "framer-motion";
 
 const MainLayout = () => {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading] = useState(false);
   const location = useLocation();
 
   // Robust Scroll-to-Hash handler with offset and loading screen wait
@@ -46,14 +46,6 @@ const MainLayout = () => {
     };
   }, [location.pathname, location.hash, isLoading]);
 
-  // Handle Loading Screen Timeout on Mount
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 2000); // 2 seconds splash load
-    return () => clearTimeout(timer);
-  }, []);
-
   return (
     <div className="relative min-h-screen bg-[#F8FCFB] text-[#17332E] font-sans flex flex-col overflow-x-hidden">
       {/* Scroll Progress Bar at the top */}
@@ -75,17 +67,17 @@ const MainLayout = () => {
 
           {/* Layout Content Body */}
           <main className="flex-grow pt-20 relative z-10">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={location.pathname}
-                initial={{ opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -12 }}
-                transition={{ duration: 0.35, ease: "easeInOut" }}
-              >
+            <Suspense
+              fallback={
+                <div className="min-h-[55vh] flex items-center justify-center bg-[#F8FCFB]">
+                  <div className="w-10 h-10 border-4 border-[#00C7A0]/30 border-t-[#0088A9] rounded-full animate-spin" />
+                </div>
+              }
+            >
+              <div key={location.pathname} className="page-fade-in">
                 <Outlet />
-              </motion.div>
-            </AnimatePresence>
+              </div>
+            </Suspense>
           </main>
 
           {/* Footer Information */}

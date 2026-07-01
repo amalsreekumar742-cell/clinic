@@ -123,6 +123,8 @@ const Gallery = () => {
                   <img
                     src={item.img}
                     alt={item.title}
+                    loading="lazy"
+                    decoding="async"
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                   {/* Backdrop overlay */}
@@ -171,6 +173,7 @@ const Gallery = () => {
                 <img
                   src={activeImage.img}
                   alt={activeImage.title}
+                  decoding="async"
                   className="w-full h-full object-cover"
                 />
               </div>
@@ -182,7 +185,7 @@ const Gallery = () => {
                   {activeImage.title}
                 </h3>
                 <p className="text-xs md:text-sm text-[#17332E]/70 leading-relaxed mt-4 font-semibold">
-                  Experience clean, medical-grade, and peaceful spaces when receiving therapies at Chiro Care Clinic, Outer Ring Road, Bellandur.
+                  Experience clean, medical-grade, and peaceful spaces when receiving therapies at Chiro Care Ayurvedic Clinic in Kaloor, Ernakulam.
                 </p>
                 <button
                   onClick={() => setActiveImage(null)}

@@ -159,5 +159,149 @@ export const services = [
     duration: "6 - 10 Weeks Program",
     symptoms: ["Cracking joint sounds", "Stiffness in multiple joints", "Generalized body aches", "Swelling & heat"]
   },
+  {
+    id: 11,
+    slug: "neck-pain",
+    title: "Neck Pain",
+    iconName: "CircleDot",
+    shortDesc: "Ayurveda-informed chiropractic care for stiff neck, text neck, and cervical muscle strain.",
+    longDesc: "Neck pain often develops from poor posture, desk work, stress, or cervical joint restriction. Our approach combines posture assessment, gentle cervical mobilization, marma-informed care, and warm Ayurvedic therapies to reduce stiffness and improve movement.",
+    benefits: [
+      "Reduces cervical muscle stiffness",
+      "Improves neck mobility and posture",
+      "Supports relief from desk-work strain",
+      "Helps reduce recurring tension headaches"
+    ],
+    duration: "2 - 6 Weeks Program",
+    symptoms: ["Stiff neck", "Text neck", "Shoulder tightness", "Reduced rotation"]
+  },
+  {
+    id: 12,
+    slug: "arthritis-treatment",
+    title: "Arthritis",
+    iconName: "HandHeart",
+    shortDesc: "Natural joint-care support for arthritic stiffness, swelling, and mobility restriction.",
+    longDesc: "Arthritis requires a careful plan that reduces mechanical stress while supporting joint lubrication and comfortable movement. Chiro Care combines mobility work, Ayurvedic oil therapies, lifestyle guidance, and joint-focused recovery planning.",
+    benefits: [
+      "Supports joint lubrication and comfort",
+      "Reduces stiffness during daily movement",
+      "Improves functional range of motion",
+      "Encourages sustainable activity habits"
+    ],
+    duration: "6 - 10 Weeks Program",
+    symptoms: ["Joint stiffness", "Morning pain", "Swelling", "Reduced mobility"]
+  },
+  {
+    id: 13,
+    slug: "sports-injury",
+    title: "Sports Injury",
+    iconName: "Dumbbell",
+    shortDesc: "Rehabilitation support for sports-related strains, sprains, shoulder pain, and joint overload.",
+    longDesc: "Sports injuries need both recovery and prevention. We assess posture, joint mechanics, soft-tissue strain, and training load before creating a conservative care plan using chiropractic correction, Ayurvedic muscle support, and mobility exercises.",
+    benefits: [
+      "Supports faster return to activity",
+      "Improves joint mechanics and balance",
+      "Reduces recurring strain patterns",
+      "Builds safer mobility habits"
+    ],
+    duration: "3 - 8 Weeks Program",
+    symptoms: ["Sprains", "Muscle strain", "Overuse pain", "Reduced performance"]
+  },
+  {
+    id: 14,
+    slug: "stress-anxiety",
+    title: "Stress and Anxiety",
+    iconName: "HeartPulse",
+    shortDesc: "Calming Ayurvedic therapies and posture care for stress-related tension and fatigue.",
+    longDesc: "Stress can show up as tight shoulders, poor sleep, headaches, fatigue, and digestive imbalance. Our therapies focus on nervous-system relaxation through gentle bodywork, Shirodhara-style care where appropriate, breathing guidance, and routine correction.",
+    benefits: [
+      "Encourages relaxation and better sleep",
+      "Reduces stress-related muscle tension",
+      "Supports mind-body balance",
+      "Improves daily energy routines"
+    ],
+    duration: "2 - 6 Weeks Program",
+    symptoms: ["Stress tension", "Poor sleep", "Fatigue", "Anxiety-related tightness"]
+  },
+  {
+    id: 15,
+    slug: "weight-loss",
+    title: "Weight Loss",
+    iconName: "Scale",
+    shortDesc: "Ayurvedic weight management with detox support, activity guidance, and sustainable routines.",
+    longDesc: "Our weight-loss support focuses on gradual, sustainable change rather than extreme dieting. The plan may include Ayurvedic detox routines, Udvarthanam-style therapy, nutrition guidance, movement coaching, and habit correction.",
+    benefits: [
+      "Supports healthy metabolic routines",
+      "Encourages sustainable fat-loss habits",
+      "Improves activity confidence",
+      "Reduces bloating and heaviness"
+    ],
+    duration: "8 - 12 Weeks Program",
+    symptoms: ["Weight gain", "Low energy", "Bloating", "Slow routine recovery"]
+  },
+  {
+    id: 16,
+    slug: "knee-pain",
+    title: "Knee Pain",
+    iconName: "Footprints",
+    shortDesc: "Conservative knee pain care for stiffness, walking discomfort, and joint overload.",
+    longDesc: "Knee pain can come from arthritis, posture imbalance, sports strain, or altered gait. We review hip, ankle, and knee mechanics together, then combine mobility care with Ayurvedic joint therapies and practical strengthening guidance.",
+    benefits: [
+      "Improves walking comfort",
+      "Reduces knee stiffness",
+      "Supports balanced lower-body mechanics",
+      "Helps protect daily mobility"
+    ],
+    duration: "4 - 8 Weeks Program",
+    symptoms: ["Knee stiffness", "Pain climbing stairs", "Walking pain", "Joint clicking"]
+  },
+  {
+    id: 17,
+    slug: "facial-paralysis",
+    title: "Facial Paralysis Support",
+    iconName: "SmilePlus",
+    shortDesc: "Supportive Ayurvedic and neuromuscular care for facial weakness recovery plans.",
+    longDesc: "Facial paralysis needs prompt medical evaluation and careful follow-up. Chiro Care offers supportive Ayurvedic and neuromuscular care for facial stiffness, weakness, and recovery comfort as part of a coordinated plan.",
+    benefits: [
+      "Supports facial muscle comfort",
+      "Encourages gentle neuromuscular activation",
+      "Helps reduce associated neck tension",
+      "Provides guided recovery routines"
+    ],
+    duration: "Case-Based Program",
+    symptoms: ["Facial weakness", "Facial stiffness", "Jaw tension", "Neck tightness"]
+  },
+  {
+    id: 18,
+    slug: "parkinson-support",
+    title: "Parkinson Support",
+    iconName: "BrainCircuit",
+    shortDesc: "Supportive mobility, posture, and wellness care for people managing Parkinsonian symptoms.",
+    longDesc: "Parkinson's disease requires ongoing medical care. Our supportive program focuses on posture, stiffness, balance confidence, relaxation, and wellness routines that may help patients feel more mobile and comfortable in daily life.",
+    benefits: [
+      "Supports posture and mobility routines",
+      "Helps manage stiffness and fatigue",
+      "Encourages safe movement habits",
+      "Complements ongoing medical care"
+    ],
+    duration: "Ongoing Support Program",
+    symptoms: ["Stiffness", "Posture changes", "Low mobility", "Balance concerns"]
+  },
+  {
+    id: 19,
+    slug: "slip-disc",
+    title: "Slip Disc",
+    iconName: "Disc3",
+    shortDesc: "Non-surgical support for slipped disc, bulging disc, and radiating back or leg pain.",
+    longDesc: "Slip disc pain often needs careful structural assessment and conservative management. Our program combines gentle spine care, decompression-oriented guidance, Ayurvedic lower-back therapies, and activity modifications.",
+    benefits: [
+      "Supports non-surgical disc recovery",
+      "Reduces nerve-irritation discomfort",
+      "Improves spine mobility and confidence",
+      "Provides safer bending and sitting guidance"
+    ],
+    duration: "6 - 12 Weeks Program",
+    symptoms: ["Lower back pain", "Radiating leg pain", "Numbness", "Pain while sitting"]
+  },
   
 ];

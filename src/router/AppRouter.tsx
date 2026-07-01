@@ -4,7 +4,15 @@ import MainLayout from "../layouts/MainLayout";
 
 // Lazy Load Pages
 const Home = lazy(() => import("../pages/Home"));
+const About = lazy(() => import("../pages/About"));
+const Services = lazy(() => import("../pages/Services"));
+const ServiceDetail = lazy(() => import("../pages/ServiceDetail"));
+const Treatments = lazy(() => import("../pages/Treatments"));
+const TreatmentDetail = lazy(() => import("../pages/TreatmentDetail"));
 const Gallery = lazy(() => import("../pages/Gallery"));
+const Blog = lazy(() => import("../pages/Blog"));
+const BlogPost = lazy(() => import("../pages/BlogPost"));
+const Contact = lazy(() => import("../pages/Contact"));
 
 // Page transition chunk loading spinner
 const PageLoader = () => (
@@ -30,13 +38,18 @@ const AppRouter = () => {
           <Route index element={<Home />} />
           
           {/* Standalone Pages */}
+          <Route path="about" element={<About />} />
+          <Route path="services" element={<Services />} />
+          <Route path="services/:slug" element={<ServiceDetail />} />
+          <Route path="treatments" element={<Treatments />} />
+          <Route path="treatments/:slug" element={<TreatmentDetail />} />
           <Route path="gallery" element={<Gallery />} />
-          
-          {/* Sub-paths redirect to corresponding single-page hash sections */}
-          <Route path="about" element={<RedirectToHash hash="about" />} />
-          <Route path="services" element={<RedirectToHash hash="services" />} />
+          <Route path="blog" element={<Blog />} />
+          <Route path="blog/:slug" element={<BlogPost />} />
+          <Route path="contact" element={<Contact />} />
+
+          {/* Legacy hash-only section aliases */}
           <Route path="doctor" element={<RedirectToHash hash="doctor" />} />
-          <Route path="contact" element={<RedirectToHash hash="contact" />} />
           
           {/* Fallback redirect to home page */}
           <Route path="*" element={<Navigate to="/" replace />} />

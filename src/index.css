@@ -195,3 +195,13 @@ input:focus, select:focus, textarea:focus {
 .gradient-luxury {
   background: linear-gradient(135deg, var(--color-dark-accent), var(--color-primary));
 }
+
+/* Page route transition fade-in */
+@keyframes pageFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.page-fade-in {
+  animation: pageFadeIn 0.25s ease-in-out;
+}

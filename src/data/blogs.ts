@@ -2,7 +2,7 @@ export const blogs = [
   {
     slug: "benefits-of-ayurveda",
     title: "The Holistic Benefits of Ayurveda for Modern Life",
-    author: "Dr. Ananya Nair (BAMS)",
+    author: "Chiro Care Clinical Team",
     date: "June 15, 2026",
     readTime: "5 min read",
     category: "Ayurveda",
@@ -30,7 +30,7 @@ export const blogs = [
   {
     slug: "chiropractic-care-explained",
     title: "Understanding Chiropractic Care: Myths vs. Facts",
-    author: "Dr. Rohan Matthews (DC)",
+    author: "Chiro Care Clinical Team",
     date: "June 10, 2026",
     readTime: "6 min read",
     category: "Chiropractic",
@@ -58,7 +58,7 @@ export const blogs = [
   {
     slug: "managing-sciatica-naturally",
     title: "How to Manage Sciatica Pain Naturally Without Surgery",
-    author: "Dr. Ananya Nair & Dr. Rohan Matthews",
+    author: "Chiro Care Clinical Team",
     date: "May 28, 2026",
     readTime: "7 min read",
     category: "Therapy",
@@ -86,7 +86,7 @@ export const blogs = [
   {
     slug: "migraine-relief-tips",
     title: "5 Ayurvedic and Postural Tips for Chronic Migraine Relief",
-    author: "Dr. Ananya Nair (BAMS)",
+    author: "Chiro Care Clinical Team",
     date: "May 18, 2026",
     readTime: "4 min read",
     category: "Tips & Wellness",
@@ -118,7 +118,7 @@ export const blogs = [
   {
     slug: "joint-pain-solutions",
     title: "Integrated Solutions for Osteoarthritis and Joint Wear",
-    author: "Dr. Rohan Matthews (DC)",
+    author: "Chiro Care Clinical Team",
     date: "May 05, 2026",
     readTime: "6 min read",
     category: "Joints",
@@ -146,7 +146,7 @@ export const blogs = [
   {
     slug: "healthy-lifestyle-habits",
     title: "Daily Dinacharya: Ayurvedic Habits for Lasting Energy",
-    author: "Dr. Ananya Nair (BAMS)",
+    author: "Chiro Care Clinical Team",
     date: "April 20, 2026",
     readTime: "5 min read",
     category: "Lifestyle",
@@ -167,8 +167,9 @@ export const blogs = [
       },
       {
         sectionTitle: "Conclusion",
-        text: "Consistency is key. By incorporating even two of these habits—tongue scraping and having a light, early dinner—you will see a dramatic boost in your energy, digestion, and mental clarity within just one week."
+        text: "Consistency is key. By incorporating even two of these habits - tongue scraping and having a light, early dinner - you will see a dramatic boost in your energy, digestion, and mental clarity within just one week."
       }
     ]
   }
 ];
+

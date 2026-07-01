@@ -104,6 +104,8 @@ const Blog = () => {
                     <img
                       src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&q=80&w=400"
                       alt={blog.title}
+                      loading="lazy"
+                      decoding="async"
                       className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 pointer-events-none opacity-80"
                     />
                     <div className="absolute inset-0 bg-[#005D73]/10" />

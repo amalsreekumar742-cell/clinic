@@ -1,13 +1,14 @@
 import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import * as Icons from "lucide-react";
 import {
-  Calendar, Phone, ArrowRight, MessageSquare, CheckCircle,
-  MapPin, Heart, Shield, Sparkles, Clock, Mail, X, HelpCircle,
+  Calendar, Phone, ArrowRight, CheckCircle,
+  MapPin, Clock, X, ChevronDown, ChevronUp,
   Award, Users, GraduationCap
 } from "lucide-react";
 import SEO from "../seo/SEO";
 import { services } from "../data/services";
+import { faqs, getFaqSchema } from "../seo/site";
+import { getIconForName } from "../components/IconForName";
 
 // Filter exactly the 10 services shown in your image
 const CORE_SERVICE_SLUGS = [
@@ -199,7 +200,7 @@ ${bookingData.message && bookingData.message.trim() ? `- Description: ${bookingD
   const remainingServices = clinicServices.slice(6);
 
   const renderServiceCard = (service: any) => {
-    const IconComponent = (Icons[service.iconName as keyof typeof Icons] || HelpCircle) as React.ComponentType<any>;
+    const IconComponent = getIconForName(service.iconName) as React.ComponentType<any>;
     const imgUrl = serviceImages[service.slug];
 
     return (
@@ -213,6 +214,8 @@ ${bookingData.message && bookingData.message.trim() ? `- Description: ${bookingD
           <img
             src={imgUrl}
             alt={service.title}
+            loading="lazy"
+            decoding="async"
             className="w-full h-full object-cover group-hover:scale-103 transition-transform duration-700 pointer-events-none"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent pointer-events-none" />
@@ -258,9 +261,10 @@ ${bookingData.message && bookingData.message.trim() ? `- Description: ${bookingD
   return (
     <>
       <SEO
-        title="Chiro Care"
-        description="CHIRO CARE AYURVEDIC CLINIC combines structural spine alignment with traditional Ayurvedic healing for long-term pain relief."
+        title="Best Ayurvedic Clinic in Kerala for Back Pain & Panchakarma"
+        description="Chiro Care Ayurvedic Clinic in Kaloor, Ernakulam combines Ayurveda-informed chiropractic care, Panchakarma therapies, and non-surgical pain relief for back pain, migraine, sciatica, disc problems, and joint pain."
         canonicalPath=""
+        schemas={[getFaqSchema()]}
       />
 
       {/* ==================== 1. HERO SECTION ==================== */}
@@ -431,15 +435,17 @@ ${bookingData.message && bookingData.message.trim() ? `- Description: ${bookingD
               <div className="relative aspect-[4/5] rounded-[2.8rem] overflow-hidden" style={{ border: "2px solid rgba(0,199,160,0.3)", boxShadow: "0 32px 80px rgba(0,0,0,0.6), 0 0 60px rgba(0,199,160,0.1)" }}>
                 <img
                   src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&q=80&w=800"
-                  alt="Dr. Lijomon MJ Lead Chiropractic Specialist"
+                  alt="Lijomon MJ Lead Chiropractic Specialist"
+                  fetchPriority="high"
+                  decoding="async"
                   className="w-full h-full object-cover hover:scale-105 transition-transform duration-700 pointer-events-none"
                 />
                 {/* Bottom gradient overlay */}
                 <div className="absolute inset-0 pointer-events-none" style={{ background: "linear-gradient(to top, rgba(10,22,40,0.8) 0%, rgba(10,22,40,0.2) 40%, transparent 70%)" }} />
                 {/* Name badge at bottom */}
                 <div className="absolute bottom-0 left-0 right-0 p-5 pointer-events-none">
-                  <p className="text-white font-extrabold text-base font-serif leading-tight">Dr. Lijomon MJ</p>
-                  <p className="text-[10px] font-bold uppercase tracking-widest" style={{ color: "#00C7A0" }}>Lead Chiropractor · USA Trained</p>
+                  <p className="text-white font-extrabold text-base font-serif leading-tight">Lijomon MJ</p>
+                  <p className="text-[10px] font-bold uppercase tracking-widest" style={{ color: "#00C7A0" }}>Lead Chiropractor / USA Trained</p>
                 </div>
               </div>
             </motion.div>
@@ -591,9 +597,9 @@ ${bookingData.message && bookingData.message.trim() ? `- Description: ${bookingD
             >
               {isAllServicesOpen ? "Show Less" : "View All Services"}
               {isAllServicesOpen ? (
-                <Icons.ChevronUp className="w-4 h-4" />
+                <ChevronUp className="w-4 h-4" />
               ) : (
-                <Icons.ChevronDown className="w-4 h-4" />
+                <ChevronDown className="w-4 h-4" />
               )}
             </button>
           </div>
@@ -884,6 +890,35 @@ ${bookingData.message && bookingData.message.trim() ? `- Description: ${bookingD
         </div>
       </section>
 
+      <section id="faq" className="py-8 md:py-14 bg-white px-4 md:px-8 relative z-10 border-t border-[#EEF8F6] select-none">
+        <div className="max-w-4xl mx-auto">
+          <div className="text-left mb-6">
+            <span className="text-xs uppercase tracking-[0.25em] font-extrabold text-[#0088A9] block mb-2">
+              Patient Questions
+            </span>
+            <h2 className="font-serif text-3xl md:text-4xl font-extrabold text-[#17332E] leading-tight">
+              Frequently Asked Questions
+            </h2>
+          </div>
+
+          <div className="divide-y divide-[#00C7A0]/12 border-y border-[#00C7A0]/12 text-left">
+            {faqs.map((faq, index) => (
+              <details key={faq.question} className="group py-4" open={index === 0}>
+                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-sm md:text-base font-extrabold text-[#17332E]">
+                  <span>{faq.question}</span>
+                  <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#EEF8F6] text-[#0088A9] transition-transform group-open:rotate-45">
+                    +
+                  </span>
+                </summary>
+                <p className="mt-3 max-w-3xl text-xs md:text-sm text-[#17332E]/75 leading-relaxed font-medium">
+                  {faq.answer}
+                </p>
+              </details>
+            ))}
+          </div>
+        </div>
+      </section>
+
 
       {/* ==================== PREMIUM BOOKING MODAL ==================== */}
       <AnimatePresence>
@@ -918,7 +953,7 @@ ${bookingData.message && bookingData.message.trim() ? `- Description: ${bookingD
                     Booking Confirmed!
                   </h3>
                   <p className="text-xs md:text-sm text-[#17332E]/70 max-w-sm leading-relaxed mt-2.5 font-semibold">
-                    Thank you. Dr. Lijomon MJ's assistant will call you on your provided number shortlyf your consultation slot.
+                    Thank you. Lijomon MJ's assistant will call you on your provided number shortly to confirm your consultation slot.
                   </p>
                   <button
                     onClick={() => {

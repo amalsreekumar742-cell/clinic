@@ -1,5 +1,11 @@
 import { Helmet } from "react-helmet-async";
 import { Blog } from "../types/Blog";
+import {
+  DEFAULT_IMAGE,
+  SITE_NAME,
+  SITE_URL,
+  getClinicSchema,
+} from "./site";
 
 interface SEOProps {
   title?: string;
@@ -9,71 +15,22 @@ interface SEOProps {
   ogImage?: string;
   isBlogPost?: boolean;
   blogData?: Blog | null;
+  schemas?: object[];
 }
 
 const SEO = ({
-  title = "Chiro Care Ayurvedic Clinic",
-  description = "Experience natural healing through Ayurveda & Chiropractic Care. Restore balance, relieve pain, and improve your life at Chiro Care Clinic.",
+  title = "Best Ayurvedic Clinic in Kerala",
+  description = "Chiro Care Ayurvedic Clinic in Kaloor, Ernakulam offers Ayurveda-informed chiropractic care for back pain, neck pain, migraine, sciatica, disc problems, and Panchakarma wellness.",
   canonicalPath = "",
   ogType = "website",
-  ogImage = "https://chirocareclinic.in/og-image.jpg", // Production fallback url
+  ogImage = DEFAULT_IMAGE,
   isBlogPost = false,
-  blogData = null
+  blogData = null,
+  schemas = []
 }: SEOProps) => {
-  const siteUrl = "https://chirocareclinic.in";
-  const canonicalUrl = `${siteUrl}${canonicalPath}`;
-  const fullTitle = `${title} | Natural Healing. Lasting Wellness.`;
-
-  // Local Clinic Schema
-  const clinicSchema = {
-    "@context": "https://schema.org",
-    "@type": "MedicalClinic",
-    "name": "Chiro Care Ayurvedic Clinic",
-    "alternateName": "Chiro Care Clinic",
-    "url": siteUrl,
-    "logo": `${siteUrl}/logo.png`,
-    "image": ogImage,
-    "description": description,
-    "telephone": "+91-6282018754",
-    "email": "info@chirocareclinic.in",
-    "priceRange": "$$",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "BRRA 46, Bank Road, Metro pillar.567, Avenue.5th, Kaloor",
-      "addressLocality": "Ernakulam",
-      "addressRegion": "Kerala",
-      "postalCode": "682017",
-      "addressCountry": "IN"
-    },
-    "geo": {
-      "@type": "GeoCoordinates",
-      "latitude": "10.003362",
-      "longitude": "76.299104"
-    },
-    "openingHoursSpecification": [
-      {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-        "opens": "09:00",
-        "closes": "20:00"
-      },
-      {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": "Sunday",
-        "opens": "09:00",
-        "closes": "14:00"
-      }
-    ],
-    "sameAs": [
-      "https://facebook.com/chirocareclinic",
-      "https://instagram.com/chirocareclinic",
-      "https://youtube.com/chirocareclinic"
-    ],
-    "medicalSpecialty": [
-      "Chiropractic",
-      "Ayurvedic"
-    ]
-  };
+  const canonicalUrl = `${SITE_URL}${canonicalPath}`;
+  const fullTitle = title.includes(SITE_NAME) ? title : `${title} | ${SITE_NAME}`;
+  const schemaGraph = [getClinicSchema(description, ogImage), ...schemas];
 
   // Blog Post Schema if relevant
   const blogSchema = isBlogPost && blogData ? {
@@ -91,37 +48,51 @@ const SEO = ({
       "name": "Chiro Care Ayurvedic Clinic",
       "logo": {
         "@type": "ImageObject",
-        "url": `${siteUrl}/logo.png`
+        "url": DEFAULT_IMAGE
       }
     },
     "datePublished": new Date(blogData.date).toISOString(),
+    "dateModified": new Date(blogData.date).toISOString(),
+    "keywords": blogData.tags.join(", "),
     "mainEntityOfPage": canonicalUrl
   } : null;
+
+  // Keywords from blog tags (or generic clinic keywords for non-blog pages)
+  const keywords = blogData?.tags?.join(", ") || "Ayurvedic clinic Kerala, chiropractic care Ernakulam, back pain treatment, migraine relief, sciatica, Panchakarma Kochi";
 
   return (
     <Helmet>
       {/* Basic Title and Meta */}
       <title>{fullTitle}</title>
       <meta name="description" content={description} />
+      <meta name="keywords" content={keywords} />
+      <meta name="robots" content="index, follow, max-image-preview:large" />
+      <meta name="theme-color" content="#0088A9" />
       <link rel="canonical" href={canonicalUrl} />
 
       {/* Open Graph / Facebook */}
-      <meta property="og:site_name" content="Chiro Care Ayurvedic Clinic" />
+      <meta property="og:site_name" content={SITE_NAME} />
       <meta property="og:type" content={ogType} />
       <meta property="og:title" content={fullTitle} />
       <meta property="og:description" content={description} />
       <meta property="og:url" content={canonicalUrl} />
       <meta property="og:image" content={ogImage} />
+      <meta property="og:image:width" content="1200" />
+      <meta property="og:image:height" content="630" />
+      <meta property="og:image:alt" content="Chiro Care Ayurvedic Clinic" />
+      <meta property="og:locale" content="en_IN" />
 
       {/* Twitter Cards */}
       <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:site" content="@chirocareclinic" />
+      <meta name="twitter:creator" content="@chirocareclinic" />
       <meta name="twitter:title" content={fullTitle} />
       <meta name="twitter:description" content={description} />
       <meta name="twitter:image" content={ogImage} />
+      <meta name="twitter:image:alt" content="Chiro Care Ayurvedic Clinic" />
 
-      {/* Local SEO Structured Data */}
       <script type="application/ld+json">
-        {JSON.stringify(clinicSchema)}
+        {JSON.stringify(schemaGraph)}
       </script>
 
       {/* Conditional Blog Schema */}

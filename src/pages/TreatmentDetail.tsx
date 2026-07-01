@@ -2,6 +2,7 @@ import { useParams, Link, useNavigate } from "react-router-dom";
 import { ArrowLeft, Clock, AlertCircle, CheckCircle, ChevronRight, Leaf, Calendar, Phone } from "lucide-react";
 import SEO from "../seo/SEO";
 import { treatments } from "../data/treatments";
+import { getBreadcrumbSchema } from "../seo/site";
 
 const TreatmentDetail = () => {
   const { slug } = useParams();
@@ -22,13 +23,47 @@ const TreatmentDetail = () => {
       </div>
     );
   }
+  const treatmentFaqs = [
+    {
+      question: `What is ${treatment.title} used for?`,
+      answer: `${treatment.title} is commonly used as Ayurvedic support for ${treatment.indications.slice(0, 3).join(", ").toLowerCase()} after a consultation.`,
+    },
+    {
+      question: `How is ${treatment.title.toLowerCase()} planned at Chiro Care?`,
+      answer: "The therapy plan is selected after reviewing symptoms, body constitution, comfort level, and clinical suitability.",
+    },
+    {
+      question: "Where can I take this therapy?",
+      answer: "You can request the therapy at Chiro Care Ayurvedic Clinic in Kaloor, Ernakulam, Kerala.",
+    },
+  ];
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: treatmentFaqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faq.answer,
+      },
+    })),
+  };
 
   return (
     <>
       <SEO 
-        title={`${treatment.title} Therapy`}
+        title={`${treatment.title} Therapy in Kerala`}
         description={treatment.shortDesc}
         canonicalPath={`/treatments/${treatment.slug}`}
+        schemas={[
+          getBreadcrumbSchema([
+            { name: "Home", path: "/" },
+            { name: "Treatments", path: "/treatments" },
+            { name: treatment.title, path: `/treatments/${treatment.slug}` },
+          ]),
+          faqSchema,
+        ]}
       />
 
       {/* Breadcrumbs */}
@@ -107,6 +142,56 @@ const TreatmentDetail = () => {
                     >
                       {ind}
                     </span>
+                  ))}
+                </div>
+              </div>
+
+              <div className="mt-6 border-t border-[#00C7A0]/15 pt-8">
+                <h2 className="font-serif text-xl sm:text-2xl font-black text-[#17332E] mb-4">
+                  {treatment.title} Therapy Process
+                </h2>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  {[
+                    {
+                      title: "Consultation",
+                      text: "The team reviews your symptoms, comfort level, medical context, and Ayurvedic body constitution before therapy selection.",
+                    },
+                    {
+                      title: "Preparation",
+                      text: "Medicated oils, herbal materials, session duration, and pressure levels are chosen according to the therapy and patient tolerance.",
+                    },
+                    {
+                      title: "Aftercare",
+                      text: "You receive practical guidance on rest, hydration, food timing, movement, and follow-up scheduling for better results.",
+                    },
+                  ].map((item) => (
+                    <article key={item.title} className="bg-white border border-[#00C7A0]/10 rounded-2xl p-5 shadow-sm">
+                      <h3 className="font-serif text-base font-black text-[#0088A9] mb-2">
+                        {item.title}
+                      </h3>
+                      <p className="text-xs md:text-sm text-[#17332E]/75 leading-relaxed font-medium">
+                        {item.text}
+                      </p>
+                    </article>
+                  ))}
+                </div>
+              </div>
+
+              <div className="mt-6 border-t border-[#00C7A0]/15 pt-8">
+                <h2 className="font-serif text-xl sm:text-2xl font-black text-[#17332E] mb-4">
+                  Questions About {treatment.title}
+                </h2>
+                <div className="divide-y divide-[#00C7A0]/10 border-y border-[#00C7A0]/10">
+                  {treatmentFaqs.map((faq, index) => (
+                    <details key={faq.question} className="py-4 group" open={index === 0}>
+                      <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-sm font-extrabold text-[#17332E]">
+                        <span>{faq.question}</span>
+                        <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#EEF8F6] text-[#0088A9] transition-transform group-open:rotate-45">+</span>
+                      </summary>
+                      <p className="mt-3 text-xs md:text-sm text-[#17332E]/75 leading-relaxed font-medium">
+                        {faq.answer}
+                      </p>
+                    </details>
                   ))}
                 </div>
               </div>

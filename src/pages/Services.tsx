@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import * as Icons from "lucide-react";
-import { Search, ArrowRight, HelpCircle, Inbox } from "lucide-react";
+import { Search, ArrowRight, Inbox } from "lucide-react";
 import SEO from "../seo/SEO";
 import { services } from "../data/services";
 import { Service } from "../types/Service";
+import { getIconForName } from "../components/IconForName";
 
 const Services = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -40,8 +40,8 @@ const Services = () => {
   return (
     <>
       <SEO 
-        title="Our Services" 
-        description="Browse our 15 specialized chiropractic and Ayurvedic treatments for migraines, joint pain, disc problems, sciatica, and cellular detoxification."
+        title="Ayurvedic Pain Treatment Services in Kerala" 
+        description="Browse Chiro Care's Ayurveda-informed chiropractic services for migraine, back pain, sciatica, disc problems, shoulder pain, cervical spondylosis, and joint pain in Ernakulam, Kerala."
         canonicalPath="/services"
       />
 
@@ -105,7 +105,7 @@ const Services = () => {
           {filteredServices.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {filteredServices.map((service: any) => {
-                const IconComp = (Icons[service.iconName as keyof typeof Icons] || HelpCircle) as React.ComponentType<any>;
+                const IconComp = getIconForName(service.iconName) as React.ComponentType<any>;
                 return (
                   <motion.div
                     key={service.id}

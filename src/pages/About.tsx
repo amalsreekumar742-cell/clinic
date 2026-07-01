@@ -5,19 +5,11 @@ import SEO from "../seo/SEO";
 const About = () => {
   const team = [
     {
-      name: "Dr. Ananya Nair",
-      role: "Chief Ayurvedic Consultant & BAMS",
-      qual: "BAMS (Bachelor of Ayurvedic Medicine & Surgery), MD Ayurveda",
-      exp: "14+ Years of Clinical Practice",
-      desc: "Dr. Ananya Nair is a veteran Ayurvedic physician specialized in pulse diagnostics (Nadi Pariksha) and custom Panchakarma cleansing plans. She focuses on aligning bodily energies and reducing tissue inflammation naturally.",
-      avatar: "https://images.unsplash.com/photo-1594824813573-246434de83fb?auto=format&fit=crop&q=80&w=600"
-    },
-    {
-      name: "Dr. Rohan Matthews",
-      role: "Senior Chiropractor & Orthopedic Consultant",
-      qual: "DC (Doctor of Chiropractic - USA), MS Corrective Biomechanics",
-      exp: "25+ Years of Spine Care",
-      desc: "Dr. Rohan Matthews specializes in structural spinal decompression, biomechanical gait balancing, and sports injury recovery. He applies non-invasive alignment techniques to relieve deep nerve compression.",
+      name: "Lijomon MJ",
+      role: "Lead Spine Chiropractor",
+      qual: "Diploma in Marma and Massage, USA-trained spinal manipulation",
+      exp: "25+ Years Experience",
+      desc: "Lijomon MJ leads spine, joint, posture, and pain-management consultations at Chiro Care Ayurvedic Clinic. His work focuses on structural assessment, chiropractic alignment, Ayurvedic marma support, and practical recovery planning for chronic pain patients.",
       avatar: "https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&q=80&w=600"
     }
   ];
@@ -25,8 +17,8 @@ const About = () => {
   return (
     <>
       <SEO 
-        title="About Us" 
-        description="Learn about Chiro Care Ayurvedic Clinic's mission, philosophy, and the experienced medical team behind our Ayurveda and Chiropractic treatments."
+        title="About Chiro Care Ayurvedic Clinic Kerala" 
+        description="Learn about Chiro Care Ayurvedic Clinic in Kaloor, Ernakulam and its integrated Ayurveda-informed chiropractic approach for spine, joint, migraine, and pain care."
         canonicalPath="/about"
       />
 
@@ -91,6 +83,8 @@ const About = () => {
               <img
                 src="https://images.unsplash.com/photo-1579684389782-64d84b5e901a?auto=format&fit=crop&q=80&w=600"
                 alt="Clinic Treatment Setup"
+                loading="lazy"
+                decoding="async"
                 className="w-full h-full object-cover pointer-events-none"
               />
             </motion.div>
@@ -108,8 +102,8 @@ const About = () => {
             <h2 className="font-serif text-3xl md:text-5xl font-bold text-[#17332E] leading-tight">
               Clinical Leadership
             </h2>
-            <p className="text-sm text-[#17332E]/70 max-w-md mx-auto font-normal">
-              Experienced medical directors specializing in chiropractic orthopedics and biological purification.
+              <p className="text-sm text-[#17332E]/70 max-w-md mx-auto font-normal">
+              Clinic leadership focused on spine alignment, marma-informed care, mobility recovery, and patient-first treatment planning.
             </p>
           </div>
 
@@ -132,6 +126,8 @@ const About = () => {
                   <img
                     src={member.avatar}
                     alt={member.name}
+                    loading="lazy"
+                    decoding="async"
                     className="w-full h-full object-cover object-top hover:scale-103 transition-transform duration-700 pointer-events-none"
                   />
                 </div>
