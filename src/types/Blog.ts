@@ -12,5 +12,6 @@ export interface Blog {
   category: string;
   tags: string[];
   summary: string;
+  image: string;
   content: BlogSection[];
 }

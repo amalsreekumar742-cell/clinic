@@ -71,8 +71,8 @@ export const testimonials = [
   }
 ];
 export const successMetrics = [
-  { value: "25+", label: "Years Experience" },
+  { value: "5+", label: "Years Experience" },
   { value: "10000+", label: "Happy Patients" },
   { value: "98%", label: "Patient Satisfaction" },
-  { value: "15+", label: "Specialists" }
+  { value: "3+", label: "Specialists" }
 ];

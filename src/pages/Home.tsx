@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Calendar, Phone, ArrowRight, CheckCircle,
@@ -7,35 +8,102 @@ import {
 } from "lucide-react";
 import SEO from "../seo/SEO";
 import { services } from "../data/services";
+import { treatments } from "../data/treatments";
 import { faqs, getFaqSchema } from "../seo/site";
 import { getIconForName } from "../components/IconForName";
 
-// Filter exactly the 10 services shown in your image
-const CORE_SERVICE_SLUGS = [
-  "migraine-treatment",
-  "headache-treatment",
-  "disc-problems",
-  "shoulder-pain",
-  "sciatica",
-  "scoliosis",
-  "leg-length-measurement",
-  "cervical-spondylosis",
-  "whole-back-pain",
-  "whole-body-joint-pain"
+const CATEGORIES = [
+  { id: "all", name: "All Programs" },
+  { id: "spine-disc", name: "Spine & Disc" },
+  { id: "head-neck", name: "Head & Neck" },
+  { id: "joints-muscles", name: "Joints & Muscles" },
+  { id: "ayurvedic", name: "Ayurvedic Therapies" },
+  // { id: "wellness", name: "Wellness & Detox" }
 ];
 
-// Unsplash high-end wellness/therapy images specifically chosen for the treatments
+const itemCategoryMap: Record<string, string> = {
+  // Spine & Disc Care
+  "disc-problems": "spine-disc",
+  "sciatica": "spine-disc",
+  "scoliosis": "spine-disc",
+  "leg-length-measurement": "spine-disc",
+  "slip-disc": "spine-disc",
+  "whole-back-pain": "spine-disc",
+
+  // Head & Neck
+  "migraine-treatment": "head-neck",
+  "headache-treatment": "head-neck",
+  "cervical-spondylosis": "head-neck",
+  "neck-pain": "head-neck",
+  // "facial-paralysis": "head-neck",
+
+  // Joints & Muscles
+  "shoulder-pain": "joints-muscles",
+  "knee-pain": "joints-muscles",
+  "arthritis-treatment": "joints-muscles",
+  "sports-injury": "joints-muscles",
+  "whole-body-joint-pain": "joints-muscles",
+
+  // Ayurvedic Therapies
+  "panchakarma": "ayurvedic",
+  "abhyanga": "ayurvedic",
+  "kizhi-therapy": "ayurvedic",
+  // "njavarakizhi": "ayurvedic",
+  "shirodhara": "ayurvedic",
+  "pizhichil": "ayurvedic",
+  "nasya": "ayurvedic",
+  "steam-bath": "ayurvedic",
+
+  // Wellness & Detox
+//   "stress-anxiety": "wellness",
+//   "weight-loss": "wellness",
+//   "detox-programs": "wellness",
+//   "weight-management": "wellness",
+//   "skin-care": "wellness",
+//   "parkinson-support": "wellness"
+};
+
+// Unsplash high-end wellness/therapy images specifically chosen for the treatments (all unique, realistic)
 const serviceImages: Record<string, string> = {
-  "migraine-treatment": "/migrainnnnn.png",
-  "headache-treatment": "https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&q=80&w=600",
-  "disc-problems": "/disc.png",
-  "shoulder-pain": "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&q=80&w=600",
-  "sciatica": "https://images.unsplash.com/photo-1519824145371-296894a0daa9?auto=format&fit=crop&q=80&w=600",
-  "scoliosis": "https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&q=80&w=600",
-  "leg-length-measurement": "https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?auto=format&fit=crop&q=80&w=600",
-  "cervical-spondylosis": "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&q=80&w=600",
-  "whole-back-pain": "https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&q=80&w=600",
-  "whole-body-joint-pain": "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&q=80&w=600"
+  // Spine & Disc
+  "disc-problems": "/disc problems.webp",
+  "sciatica": "/sciatica.webp",
+  "scoliosis": "/scoliosis.webp",
+  "leg-length-measurement": "/leg-length-measurement.webp",
+  "slip-disc": "slip-disc.webp",
+  "whole-back-pain": "whole-back-pain.webp",
+
+  // Head & Neck
+  "migraine-treatment": "migrain.webp",
+  "headache-treatment": "/headache.webp",
+  "cervical-spondylosis":"cervical-spondylosis.webp",
+  "neck-pain": "/neck-pain.webp",
+  // "facial-paralysis": "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&q=80&w=600",
+
+  // Joints & Muscles
+  "shoulder-pain": "shoulder-pain.webp",
+  "knee-pain": "knee_pain.webp",
+  "arthritis-treatment": "/arthritis.webp",
+  "sports-injury": "sports-pain.webp",
+  "whole-body-joint-pain": "/whole-body-joint-pain.webp",
+
+  // Ayurvedic Therapies
+  "panchakarma": "panchakarma.webp",
+  "abhyanga": "abhyanga.webp",
+  "kizhi-therapy": "kizhi-therapy.webp",
+  // "njavarakizhi": "https://images.unsplash.com/photo-1607613009820-a29f7bb81c04?auto=format&fit=crop&q=80&w=600",
+  "shirodhara": "shirodhara.webp",
+  "pizhichil": "pizhichil.webp",
+  "nasya": "nasya.webp",
+  "steam-bath": "steam-bath.webp",
+
+  // Wellness & Detox / Other Support
+  // "stress-anxiety": "https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&q=80&w=600",
+  // "weight-loss": "https://images.unsplash.com/photo-1490645935967-10de6ba17061?auto=format&fit=crop&q=80&w=600",
+  // "detox-programs": "https://images.unsplash.com/photo-1561043433-aaf687c4cf04?auto=format&fit=crop&q=80&w=600",
+  // "weight-management": "https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&q=80&w=600",
+  // "skin-care": "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?auto=format&fit=crop&q=80&w=600",
+  // "parkinson-support": "https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?auto=format&fit=crop&q=80&w=600"
 };
 
 // Spine Motif background element
@@ -190,14 +258,30 @@ ${bookingData.message && bookingData.message.trim() ? `- Description: ${bookingD
     }, 500);
   };
 
-  // Filter out the 10 services of the clinic
-  const clinicServices = services.filter((s: any) => CORE_SERVICE_SLUGS.includes(s.slug));
+  // Unify all programs into one list
+  const allPrograms = [
+    ...services
+      .map((s: any) => ({ ...s, type: "service", categoryId: itemCategoryMap[s.slug] }))
+      .filter((s: any) => s.categoryId !== undefined),
+    ...treatments
+      .map((t: any) => ({ ...t, type: "treatment", categoryId: itemCategoryMap[t.slug] }))
+      .filter((t: any) => t.categoryId !== undefined)
+  ];
 
-  // Choose the first 6 to showcase in the main grid
-  const primaryServices = clinicServices.slice(0, 6);
+  // Active category filter state
+  const [activeCategory, setActiveCategory] = useState("all");
 
-  // The remaining 4 services to show when expanded
-  const remainingServices = clinicServices.slice(6);
+  // Get matching programs
+  const filteredPrograms = allPrograms.filter(
+    (program) => activeCategory === "all" || program.categoryId === activeCategory
+  );
+
+  // For "all" category, we paginate with "isAllServicesOpen"
+  // Let's show first 6 by default, and expand when open.
+  // For other categories, we show all of them directly.
+  const displayPrograms = activeCategory === "all"
+    ? (isAllServicesOpen ? filteredPrograms : filteredPrograms.slice(0, 6))
+    : filteredPrograms;
 
   const renderServiceCard = (service: any) => {
     const IconComponent = getIconForName(service.iconName) as React.ComponentType<any>;
@@ -205,11 +289,11 @@ ${bookingData.message && bookingData.message.trim() ? `- Description: ${bookingD
 
     return (
       <div
-        key={service.id}
+        key={`${service.type}-${service.id}`}
         onClick={() => handleBookClick(service.title)}
         className="relative overflow-hidden rounded-[2rem] bg-white border border-[#00C7A0]/10 shadow-sm hover:shadow-xl hover:border-[#00C7A0]/35 transition-all duration-400 flex flex-col h-full group hover:-translate-y-1.5 cursor-pointer"
       >
-        {/* Increased Card Image height to show more of the image down */}
+        {/* Card Image */}
         <div className="relative h-44 overflow-hidden">
           <img
             src={imgUrl}
@@ -219,6 +303,7 @@ ${bookingData.message && bookingData.message.trim() ? `- Description: ${bookingD
             className="w-full h-full object-cover group-hover:scale-103 transition-transform duration-700 pointer-events-none"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent pointer-events-none" />
+          
           <div className="absolute top-3 right-3 bg-white/95 backdrop-blur-md px-3 py-1.5 rounded-full text-[9px] font-extrabold text-[#0088A9] tracking-wider uppercase border border-white/50 shadow-sm">
             {service.duration}
           </div>
@@ -247,12 +332,14 @@ ${bookingData.message && bookingData.message.trim() ? `- Description: ${bookingD
             </ul>
           </div>
 
-          <div
+          <Link
+            to={service.type === "treatment" ? `/treatments/${service.slug}` : `/services/${service.slug}`}
+            onClick={(e) => e.stopPropagation()}
             className="border-t border-[#00C7A0]/10 pt-4 flex items-center justify-between mt-auto w-full text-xs md:text-sm font-bold text-[#0088A9] group-hover:text-[#005D73] transition-colors text-left"
           >
             <span>Learn More</span>
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform" />
-          </div>
+          </Link>
         </div>
       </div>
     );
@@ -434,8 +521,8 @@ ${bookingData.message && bookingData.message.trim() ? `- Description: ${bookingD
               <div className="absolute -inset-1 rounded-[3rem] pointer-events-none" style={{ background: "linear-gradient(135deg, rgba(0,199,160,0.5), rgba(0,136,169,0.5), transparent)", filter: "blur(8px)" }} />
               <div className="relative aspect-[4/5] rounded-[2.8rem] overflow-hidden" style={{ border: "2px solid rgba(0,199,160,0.3)", boxShadow: "0 32px 80px rgba(0,0,0,0.6), 0 0 60px rgba(0,199,160,0.1)" }}>
                 <img
-                  src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&q=80&w=800"
-                  alt="Lijomon MJ Lead Chiropractic Specialist"
+                  src="/Dr.Neena James.webp?auto=format&fit=crop&q=80&w=800"
+                  alt="Dr.Neena James "
                   fetchPriority="high"
                   decoding="async"
                   className="w-full h-full object-cover hover:scale-105 transition-transform duration-700 pointer-events-none"
@@ -444,8 +531,8 @@ ${bookingData.message && bookingData.message.trim() ? `- Description: ${bookingD
                 <div className="absolute inset-0 pointer-events-none" style={{ background: "linear-gradient(to top, rgba(10,22,40,0.8) 0%, rgba(10,22,40,0.2) 40%, transparent 70%)" }} />
                 {/* Name badge at bottom */}
                 <div className="absolute bottom-0 left-0 right-0 p-5 pointer-events-none">
-                  <p className="text-white font-extrabold text-base font-serif leading-tight">Lijomon MJ</p>
-                  <p className="text-[10px] font-bold uppercase tracking-widest" style={{ color: "#00C7A0" }}>Lead Chiropractor / USA Trained</p>
+                  <p className="text-white font-extrabold text-base font-serif leading-tight">Dr. Neena James</p>
+                  <p className="text-[10px] font-bold uppercase tracking-widest" style={{ color: "#00C7A0" }}>BAMS</p>
                 </div>
               </div>
             </motion.div>
@@ -544,10 +631,10 @@ ${bookingData.message && bookingData.message.trim() ? `- Description: ${bookingD
         className="bg-gradient-to-b from-[#F8FCFB] to-[#EEF8F6] py-10 px-4 md:px-8 border-y border-[#00C7A0]/10 select-none relative z-10"
       >
         <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6">
-          <AnimatedCounter value="25+" label="Years Experience" />
-          <AnimatedCounter value="10000+" label="Patients Treated" />
+          <AnimatedCounter value="5+" label="Years Experience" />
+          <AnimatedCounter value="100+" label="Patients Treated" />
           <AnimatedCounter value="98%" label="Success Rate" />
-          <AnimatedCounter value="15+ Years" label="Local Trust" />
+          <AnimatedCounter value="3+ Years" label="Local Trust" />
         </div>
       </motion.section>
 
@@ -567,42 +654,72 @@ ${bookingData.message && bookingData.message.trim() ? `- Description: ${bookingD
             </p>
           </div>
 
-          {/* Core Services Cards Grid (1 col mobile, 2 cols tablet, 3 cols desktop) */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-            {primaryServices.map((service: any) => renderServiceCard(service))}
+          {/* Category Tabs Selection */}
+          <div className="flex flex-wrap items-center justify-center gap-2 mb-10 overflow-x-auto pb-3 scrollbar-none max-w-5xl mx-auto">
+            {CATEGORIES.map((cat) => {
+              const isActive = activeCategory === cat.id;
+              return (
+                <button
+                  key={cat.id}
+                  onClick={() => {
+                    setActiveCategory(cat.id);
+                    setIsAllServicesOpen(false); // Reset expansion on tab change
+                  }}
+                  className="relative px-5 py-2.5 rounded-full text-xs font-extrabold tracking-widest uppercase transition-all duration-300 cursor-pointer overflow-hidden border border-[#00C7A0]/15"
+                  style={{
+                    color: isActive ? "#ffffff" : "#0088A9"
+                  }}
+                >
+                  {isActive && (
+                    <motion.div
+                      layoutId="activeTabBackground"
+                      className="absolute inset-0 bg-gradient-to-r from-[#00C7A0] to-[#0088A9]"
+                      transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                    />
+                  )}
+                  <span className="relative z-10">{cat.name}</span>
+                </button>
+              );
+            })}
           </div>
 
-          <AnimatePresence>
-            {isAllServicesOpen && (
-              <motion.div
-                key="remaining-services-grid"
-                initial={{ height: 0, opacity: 0 }}
-                animate={{ height: "auto", opacity: 1 }}
-                exit={{ height: 0, opacity: 0 }}
-                transition={{ duration: 0.5, ease: "easeInOut" }}
-                className="overflow-hidden w-full"
-              >
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 pt-6 md:pt-8">
-                  {remainingServices.map((service: any) => renderServiceCard(service))}
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
+          {/* Services/Programs Cards Grid */}
+          <motion.div
+            layout
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"
+          >
+            <AnimatePresence mode="popLayout">
+              {displayPrograms.map((program: any) => (
+                <motion.div
+                  key={`${program.type}-${program.id}`}
+                  layout
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.95 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  {renderServiceCard(program)}
+                </motion.div>
+              ))}
+            </AnimatePresence>
+          </motion.div>
 
           {/* Large CTA: View All Services (Toggles Inline Grid Expansion) */}
-          <div className="text-center mt-6 md:mt-10 lg:mt-12">
-            <button
-              onClick={() => setIsAllServicesOpen(!isAllServicesOpen)}
-              className="inline-flex items-center gap-2 bg-gradient-to-r from-[#00C7A0] to-[#0088A9] text-white px-8 py-4.5 rounded-full font-extrabold text-xs uppercase tracking-widest shadow-md hover:shadow-lg transition-all cursor-pointer hover:-translate-y-0.5"
-            >
-              {isAllServicesOpen ? "Show Less" : "View All Services"}
-              {isAllServicesOpen ? (
-                <ChevronUp className="w-4 h-4" />
-              ) : (
-                <ChevronDown className="w-4 h-4" />
-              )}
-            </button>
-          </div>
+          {activeCategory === "all" && filteredPrograms.length > 6 && (
+            <div className="text-center mt-6 md:mt-10 lg:mt-12">
+              <button
+                onClick={() => setIsAllServicesOpen(!isAllServicesOpen)}
+                className="inline-flex items-center gap-2 bg-gradient-to-r from-[#00C7A0] to-[#0088A9] text-white px-8 py-4.5 rounded-full font-extrabold text-xs uppercase tracking-widest shadow-md hover:shadow-lg transition-all cursor-pointer hover:-translate-y-0.5"
+              >
+                {isAllServicesOpen ? "Show Less" : "View All Services"}
+                {isAllServicesOpen ? (
+                  <ChevronUp className="w-4 h-4" />
+                ) : (
+                  <ChevronDown className="w-4 h-4" />
+                )}
+              </button>
+            </div>
+          )}
         </div>
       </section>
 
@@ -681,74 +798,154 @@ ${bookingData.message && bookingData.message.trim() ? `- Description: ${bookingD
         </div>
       </section>
 
-      {/* ==================== 5. MEET OUR DOCTOR ==================== */}
+      {/* ==================== 5. MEET OUR DOCTORS ==================== */}
       <section id="doctor" className="py-8 md:py-16 lg:py-24 bg-[#EEF8F6]/30 px-4 md:px-8 relative z-10 border-t border-[#EEF8F6] select-none">
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center">
+          {/* Section Header */}
+          <div className="text-center max-w-3xl mx-auto mb-12 md:mb-16">
+            <span className="text-xs uppercase tracking-[0.25em] font-extrabold text-[#0088A9] block mb-3">
+              Clinical Excellence
+            </span>
+            <h2 className="font-serif text-4xl md:text-5xl font-extrabold text-[#17332E] leading-[0.95]">
+              Meet Our Medical Experts
+            </h2>
+            <p className="text-xs sm:text-sm text-[#17332E]/70 mt-3 max-w-md mx-auto leading-relaxed">
+              Our specialists lead your non-surgical recovery by integrating advanced structural alignment with traditional biological rejuvenation.
+          </p>
+        </div>
 
-            {/* Left Column: Doctor Portrait Frame (Dominating Image) */}
-            <div className="lg:col-span-6 flex justify-center">
-              <div className="relative w-full max-w-[480px] aspect-[4/5] rounded-[3.5rem] bg-gradient-to-tr from-[#00C7A0]/15 to-[#0088A9]/15 overflow-hidden shadow-2xl border-[6px] border-white">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-stretch max-w-6xl mx-auto">
+
+            {/* Doctor 1: Dr. Neena James */}
+            <div className="flex flex-col sm:flex-row bg-white p-5 rounded-[2.2rem] border border-[#00C7A0]/10 shadow-xl hover:shadow-2xl transition-all duration-300 max-w-[540px] mx-auto w-full gap-5 items-stretch">
+              {/* Doctor Portrait Frame */}
+              <div className="relative w-full sm:w-[42%] aspect-[4/5] sm:aspect-auto rounded-[1.8rem] bg-gradient-to-tr from-[#00C7A0]/15 to-[#0088A9]/15 overflow-hidden shadow-md border-4 border-white shrink-0 min-h-[360px]">
                 <img
-                  src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&q=80&w=800"
-                  alt="Lijomon MJ Lead Specialist"
-                  className="w-full h-full object-cover mix-blend-multiply opacity-[0.95] pointer-events-none hover:scale-102 transition-transform duration-500"
+                  src="/Dr.Neena James.webp?auto=format&fit=crop&q=80&w=800"
+                  alt="Dr. Neena James BAMS"
+                  className="w-full h-full object-cover pointer-events-none hover:scale-103 transition-transform duration-500"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0088A9]/15 to-transparent pointer-events-none" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0088A9]/10 to-transparent pointer-events-none" />
+              </div>
+
+              {/* Doctor Info */}
+              <div className="text-left flex flex-col flex-grow gap-3 justify-between py-1">
+                <div>
+                  <span className="text-[10px] uppercase tracking-[0.2em] font-extrabold text-[#0088A9] block mb-0.5">
+                    Ayurvedic Physician & Consultant
+                  </span>
+                  <h3 className="font-serif text-xl md:text-2xl font-extrabold text-[#17332E] leading-tight">
+                    Dr. Neena James             
+
+                  </h3>
+                </div>
+
+                {/* Bullet Credentials */}
+                <div className="flex flex-col gap-2 mt-1 font-semibold text-[#17332E] text-xs">
+                  <div className="flex items-center gap-2">
+                    <CheckCircle className="w-4 h-4 text-[#00C7A0] shrink-0" />
+                    <span>BAMS Degree Specialist</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <CheckCircle className="w-4 h-4 text-[#00C7A0] shrink-0" />
+                    <span>Nadi Pariksha (Pulse Diagnosis)</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <CheckCircle className="w-4 h-4 text-[#00C7A0] shrink-0" />
+                    <span>Panchakarma & Detox Expert</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <CheckCircle className="w-4 h-4 text-[#00C7A0] shrink-0" />
+                    <span>Spine & Joint Care Expert</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <CheckCircle className="w-4 h-4 text-[#00C7A0] shrink-0" />
+                    <span>Biological Rejuvenation Specialist</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <CheckCircle className="w-4 h-4 text-[#00C7A0] shrink-0" />
+                    <span>5+ Years Clinical Exp.</span>
+                  </div>
+                </div>
+
+                {/* Action */}
+                <div className="pt-2 flex">
+                  <button
+                    onClick={() => handleBookClick("Ayurvedic Consultation")}
+                    className="btn-premium w-full inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#00C7A0] to-[#0088A9] text-white font-extrabold text-[10px] uppercase tracking-widest px-5 py-3 rounded-full shadow-md transition-transform hover:-translate-y-0.5 cursor-pointer"
+                  >
+                    <Calendar className="w-3.5 h-3.5" />
+                    Book Ayurvedic Session
+                  </button>
+                </div>
               </div>
             </div>
 
-            {/* Right Column: Bullet Credentials Only, No Biography */}
-            <div className="lg:col-span-6 text-left flex flex-col gap-5">
-              <span className="text-xs uppercase tracking-[0.25em] font-extrabold text-[#0088A9]">
-                Lead Spine Chiropractor
-              </span>
-              <h2 className="font-serif text-4xl md:text-5xl font-extrabold text-[#17332E] leading-[0.95]">
-                Meet Lijomon MJ
-              </h2>
-
-              {/* Bullet style credentials for immediate trust */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4 font-semibold text-[#17332E] text-xs md:text-sm">
-                <div className="flex items-center gap-3">
-                  <CheckCircle className="w-5 h-5 text-[#00C7A0] shrink-0" />
-                  <span>Dip. in marma and massage</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <CheckCircle className="w-5 h-5 text-[#00C7A0] shrink-0" />
-                  <span>USA-Trained Spinal Manipulation</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <CheckCircle className="w-5 h-5 text-[#00C7A0] shrink-0" />
-                  <span>Spine & Joint Specialist</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <CheckCircle className="w-5 h-5 text-[#00C7A0] shrink-0" />
-                  <span>Pain Management Expert</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <CheckCircle className="w-5 h-5 text-[#00C7A0] shrink-0" />
-                  <span>Ayurvedic Marma Expert</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <CheckCircle className="w-5 h-5 text-[#00C7A0] shrink-0" />
-                  <span>25+ Years Experience</span>
-                </div>
+            {/* Doctor 2: Dr. Lijomon MJ */}
+            <div className="flex flex-col sm:flex-row bg-white p-5 rounded-[2.2rem] border border-[#00C7A0]/10 shadow-xl hover:shadow-2xl transition-all duration-300 max-w-[540px] mx-auto w-full gap-5 items-stretch">
+              {/* Doctor Portrait Frame */}
+              <div className="relative w-full sm:w-[42%] aspect-[4/5] sm:aspect-auto rounded-[1.8rem] bg-gradient-to-tr from-[#00C7A0]/15 to-[#0088A9]/15 overflow-hidden shadow-md border-4 border-white shrink-0 min-h-[360px]">
+                <img
+                  src="/Dr.Lijomon M J.webp?auto=format&fit=crop&q=80&w=800"
+                  alt="Dr. Lijomon MJ (Chiropractor)"
+                  className="w-full h-full object-cover pointer-events-none hover:scale-103 transition-transform duration-500"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0088A9]/10 to-transparent pointer-events-none" />
               </div>
 
-              {/* Action */}
-              <div className="mt-6 flex">
-                <button
-                  onClick={() => handleBookClick("Chiropractic Consultation")}
-                  className="btn-premium inline-flex items-center gap-2.5 bg-gradient-to-r from-[#00C7A0] to-[#0088A9] text-white font-extrabold text-xs uppercase tracking-widest px-9 py-4.5 rounded-full shadow-lg cursor-pointer"
-                >
-                  <Calendar className="w-4 h-4" />
-                  Book Consultation
-                </button>
+              {/* Doctor Info */}
+              <div className="text-left flex flex-col flex-grow gap-3 justify-between py-1">
+                <div>
+                  <span className="text-[10px] uppercase tracking-[0.2em] font-extrabold text-[#0088A9] block mb-0.5">
+                    Lead Spine Chiropractor
+                  </span>
+                  <h3 className="font-serif text-xl md:text-2xl font-extrabold text-[#17332E] leading-tight">
+                    Dr. Lijomon MJ (Chiropractor)
+                  </h3>
+                </div>
+
+                {/* Bullet Credentials */}
+                <div className="flex flex-col gap-2 mt-1 font-semibold text-[#17332E] text-xs">
+                  <div className="flex items-center gap-2">
+                    <CheckCircle className="w-4 h-4 text-[#00C7A0] shrink-0" />
+                    <span>Dip. in marma and massage</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <CheckCircle className="w-4 h-4 text-[#00C7A0] shrink-0" />
+                    <span>USA-Trained Spinal Manipulation</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <CheckCircle className="w-4 h-4 text-[#00C7A0] shrink-0" />
+                    <span>Spine & Joint Specialist</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <CheckCircle className="w-4 h-4 text-[#00C7A0] shrink-0" />
+                    <span>Pain Management Expert</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <CheckCircle className="w-4 h-4 text-[#00C7A0] shrink-0" />
+                    <span>Ayurvedic Marma Expert</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <CheckCircle className="w-4 h-4 text-[#00C7A0] shrink-0" />
+                    <span>5+ Years Experience</span>
+                  </div>
+                </div>
+
+                {/* Action */}
+                <div className="pt-2 flex">
+                  <button
+                    onClick={() => handleBookClick("Chiropractic Consultation")}
+                    className="btn-premium w-full inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#00C7A0] to-[#0088A9] text-white font-extrabold text-[10px] uppercase tracking-widest px-5 py-3 rounded-full shadow-md transition-transform hover:-translate-y-0.5 cursor-pointer"
+                  >
+                    <Calendar className="w-3.5 h-3.5" />
+                    Book Chiropractic Session
+                  </button>
+                </div>
               </div>
-            </div>
+            </div>  </div>
 
           </div>
-        </div>
       </section>
 
       {/* ==================== 6. LOCATION & CONTACT ==================== */}
@@ -1019,8 +1216,10 @@ ${bookingData.message && bookingData.message.trim() ? `- Description: ${bookingD
                       onChange={(e) => setBookingData({ ...bookingData, service: e.target.value })}
                     >
                       <option value="">Select Treatment Required</option>
-                      {services.map((s: any) => (
-                        <option key={s.id} value={s.title}>{s.title}</option>
+                      {allPrograms.map((p: any) => (
+                        <option key={`${p.type}-${p.id}`} value={p.title}>
+                          {p.title} ({p.type === "treatment" ? "Ayurvedic" : "Chiropractic"})
+                        </option>
                       ))}
                     </select>
 

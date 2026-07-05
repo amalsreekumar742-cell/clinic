@@ -5,12 +5,20 @@ import SEO from "../seo/SEO";
 const About = () => {
   const team = [
     {
-      name: "Lijomon MJ",
+      name: "Dr. Lijomon MJ",
       role: "Lead Spine Chiropractor",
       qual: "Diploma in Marma and Massage, USA-trained spinal manipulation",
-      exp: "25+ Years Experience",
-      desc: "Lijomon MJ leads spine, joint, posture, and pain-management consultations at Chiro Care Ayurvedic Clinic. His work focuses on structural assessment, chiropractic alignment, Ayurvedic marma support, and practical recovery planning for chronic pain patients.",
+      exp: "5+ Years Experience",
+      desc: "Dr. Lijomon MJ leads spine, joint, posture, and pain-management consultations at Chiro Care. His work focuses on structural assessment, chiropractic alignment, Ayurvedic marma support, and practical recovery planning for chronic pain patients.",
       avatar: "https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+      name: "Dr. Neena James",
+      role: "Ayurvedic Physician & Consultant",
+      qual: "BAMS (Bachelor of Ayurvedic Medicine and Surgery)",
+      exp: "15+ Years Experience",
+      desc: "Dr. Neena James integrates traditional Ayurveda with modern spine and joint wellness. She specializes in pulse diagnosis (Nadi Pariksha), customized Panchakarma detoxes, and natural therapeutic regimens for musculoskeletal recovery.",
+      avatar: "/Dr.Neena James.webp"
     }
   ];
 
@@ -81,7 +89,7 @@ const About = () => {
               className="relative w-full max-w-[420px] aspect-[4/5] rounded-[3rem] overflow-hidden shadow-2xl border-4 border-white"
             >
               <img
-                src="https://images.unsplash.com/photo-1579684389782-64d84b5e901a?auto=format&fit=crop&q=80&w=600"
+                src="https://images.unsplash.com/photo-1598256989800-fe5f95da9787?auto=format&fit=crop&q=80&w=600"
                 alt="Clinic Treatment Setup"
                 loading="lazy"
                 decoding="async"

@@ -39,7 +39,7 @@ const Gallery = () => {
       id: 4,
       category: "Treatments",
       title: "Chiropractic Spinal Correction",
-      img: "https://images.unsplash.com/photo-1579684389782-64d84b5e901a?auto=format&fit=crop&q=80&w=800"
+      img: "https://images.unsplash.com/photo-1598256989800-fe5f95da9787?auto=format&fit=crop&q=80&w=800"
     },
     {
       id: 5,

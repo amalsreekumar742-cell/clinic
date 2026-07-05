@@ -19,6 +19,7 @@ import {
   Smile,
   SmilePlus,
   Sparkles,
+  Wind,
   Zap,
 } from "lucide-react";
 
@@ -41,6 +42,7 @@ const iconMap: Record<string, ComponentType<{ className?: string }>> = {
   Smile,
   SmilePlus,
   Sparkles,
+  Wind,
   Zap,
 };
 

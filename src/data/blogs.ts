@@ -8,6 +8,7 @@ export const blogs = [
     category: "Ayurveda",
     tags: ["Wellness", "Ayurveda", "Detox", "MindBody"],
     summary: "Discover how the ancient science of Ayurveda helps restore balance, boost immunity, and promote longevity in today's fast-paced world.",
+    image: "https://images.unsplash.com/photo-1617897903246-719242758050?auto=format&fit=crop&q=80&w=800",
     content: [
       {
         sectionTitle: "Introduction to Ancient Healing",
@@ -36,6 +37,7 @@ export const blogs = [
     category: "Chiropractic",
     tags: ["Spine Health", "Chiropractic", "Posture", "Pain Relief"],
     summary: "Demystifying chiropractic adjustments, how spine alignment supports nerve function, and what you can expect during your first consultation.",
+    image: "https://images.unsplash.com/photo-1598256989800-fe5f95da9787?auto=format&fit=crop&q=80&w=800",
     content: [
       {
         sectionTitle: "What is Chiropractic Care?",
@@ -64,6 +66,7 @@ export const blogs = [
     category: "Therapy",
     tags: ["Sciatica", "Nerve Pain", "Ayurveda", "Chiropractic"],
     summary: "A combined approach of Ayurvedic oil pooling and chiropractic decompression to heal sciatic nerve inflammation and restore leg mobility.",
+    image: "https://images.unsplash.com/photo-1519824145371-296894a0daa9?auto=format&fit=crop&q=80&w=800",
     content: [
       {
         sectionTitle: "The Agony of Sciatica",
@@ -92,6 +95,7 @@ export const blogs = [
     category: "Tips & Wellness",
     tags: ["Migraine", "Self-Care", "Posture", "Diet"],
     summary: "Simple yet effective daily habits, sinus cleansing techniques, and neck posture rules to reduce migraine triggers.",
+    image: "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&q=80&w=800",
     content: [
       {
         sectionTitle: "The Root of Migraine",
@@ -124,6 +128,7 @@ export const blogs = [
     category: "Joints",
     tags: ["Arthritis", "Joint Pain", "Knee Pain", "Ayurveda"],
     summary: "Learn how full-body detoxification and mechanical joint corrections preserve joint space and ease arthritic stiffness.",
+    image: "https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&q=80&w=800",
     content: [
       {
         sectionTitle: "The Degeneration Challenge",
@@ -152,6 +157,7 @@ export const blogs = [
     category: "Lifestyle",
     tags: ["Dinacharya", "Habits", "Energy", "Detox"],
     summary: "Unlock maximum health and energy by matching your daily schedule with nature's biological rhythms.",
+    image: "https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&q=80&w=800",
     content: [
       {
         sectionTitle: "What is Dinacharya?",

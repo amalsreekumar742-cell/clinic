@@ -255,22 +255,7 @@ export const services = [
     duration: "4 - 8 Weeks Program",
     symptoms: ["Knee stiffness", "Pain climbing stairs", "Walking pain", "Joint clicking"]
   },
-  {
-    id: 17,
-    slug: "facial-paralysis",
-    title: "Facial Paralysis Support",
-    iconName: "SmilePlus",
-    shortDesc: "Supportive Ayurvedic and neuromuscular care for facial weakness recovery plans.",
-    longDesc: "Facial paralysis needs prompt medical evaluation and careful follow-up. Chiro Care offers supportive Ayurvedic and neuromuscular care for facial stiffness, weakness, and recovery comfort as part of a coordinated plan.",
-    benefits: [
-      "Supports facial muscle comfort",
-      "Encourages gentle neuromuscular activation",
-      "Helps reduce associated neck tension",
-      "Provides guided recovery routines"
-    ],
-    duration: "Case-Based Program",
-    symptoms: ["Facial weakness", "Facial stiffness", "Jaw tension", "Neck tightness"]
-  },
+
   {
     id: 18,
     slug: "parkinson-support",

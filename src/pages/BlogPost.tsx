@@ -30,6 +30,7 @@ const BlogPost = () => {
         title={post.title}
         description={post.summary}
         canonicalPath={`/blog/${post.slug}`}
+        ogImage={post.image}
         isBlogPost={true}
         blogData={post}
         schemas={[
@@ -89,6 +90,18 @@ const BlogPost = () => {
               </span>
             </div>
           </header>
+
+          {/* Cover Hero Image */}
+          <div className="w-full h-[250px] sm:h-[420px] rounded-[2.5rem] overflow-hidden mb-12 shadow-lg border border-[#00C7A0]/10 relative group">
+            <img
+              src={post.image}
+              alt={post.title}
+              loading="lazy"
+              decoding="async"
+              className="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-500"
+            />
+            <div className="absolute inset-0 bg-[#005D73]/5 pointer-events-none" />
+          </div>
 
           {/* Post Content */}
           <article className="prose max-w-none text-[#17332E]/85 text-sm md:text-base leading-relaxed font-medium flex flex-col gap-8">
