@@ -178,5 +178,21 @@ export const treatments = [
       "Reduces stress and leaves the body feeling light"
     ],
     indications: ["Body stiffness", "Muscle soreness", "Toxin build-up", "Circulatory congestion"]
+  },
+  {
+    id: 12,
+    slug: "full-body-massage",
+    title: "Full Body Massage",
+    iconName: "Activity",
+    duration: "60 - 90 Mins Session",
+    shortDesc: "A relaxing and therapeutic full-body massage using warm medicated herbal oils to rejuvenate the body and mind.",
+    longDesc: "Ayurvedic Full Body Massage (Abhyanga) is a deeply relaxing, therapeutic treatment performed by trained therapists using customized warm herbal oils. It is designed to stimulate blood circulation, enhance lymphatic drainage, relieve muscle tension, and soothe the nervous system, helping to eliminate metabolic waste and restore total body vitality.",
+    benefits: [
+      "Promotes deep physical relaxation and relieves muscle stiffness",
+      "Improves blood circulation and lymphatic drainage",
+      "Nourishes skin texture and enhances natural glow",
+      "Reduces mental stress, anxiety, and fatigue"
+    ],
+    indications: ["Generalized body pain", "Physical fatigue & muscle tension", "Stress and anxiety", "Poor sleep patterns"]
   }
 ];

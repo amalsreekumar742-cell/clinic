@@ -53,6 +53,7 @@ const itemCategoryMap: Record<string, string> = {
   "pizhichil": "ayurvedic",
   "nasya": "ayurvedic",
   "steam-bath": "ayurvedic",
+  "full-body-massage": "ayurvedic",
 
   // Wellness & Detox
 //   "stress-anxiety": "wellness",
@@ -96,6 +97,7 @@ const serviceImages: Record<string, string> = {
   "pizhichil": "pizhichil.webp",
   "nasya": "nasya.webp",
   "steam-bath": "steam-bath.webp",
+  "full-body-massage": "full-body-massage.webp",
 
   // Wellness & Detox / Other Support
   // "stress-anxiety": "https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&q=80&w=600",
@@ -738,7 +740,7 @@ ${bookingData.message && bookingData.message.trim() ? `- Description: ${bookingD
               className="absolute left-[5%] top-[10%] w-[55%] aspect-[3/4] rounded-[2.5rem] overflow-hidden shadow-2xl border-4 border-white/90 z-10"
             >
               <img
-                src="https://images.unsplash.com/photo-1514672013381-c6d0df1c8b18?auto=format&fit=crop&q=80&w=800"
+                src="sirodhara_main.webp"
                 alt="Chiropractor performing spinal adjustment"
                 className="w-full h-full object-cover pointer-events-none"
               />
@@ -751,7 +753,7 @@ ${bookingData.message && bookingData.message.trim() ? `- Description: ${bookingD
               className="absolute right-[5%] top-0 w-[42%] aspect-square rounded-[2.5rem] overflow-hidden shadow-xl border-4 border-white/90 z-20 transform rotate-[3deg]"
             >
               <img
-                src="https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?auto=format&fit=crop&q=80&w=600"
+                src="kizhi.webp"
                 alt="Ayurvedic therapy treatment"
                 className="w-full h-full object-cover pointer-events-none"
               />
@@ -764,7 +766,7 @@ ${bookingData.message && bookingData.message.trim() ? `- Description: ${bookingD
               className="absolute right-[10%] bottom-[5%] w-[45%] aspect-[4/3] rounded-[2.5rem] overflow-hidden shadow-2xl border-4 border-white/90 z-20 transform rotate-[-4deg]"
             >
               <img
-                src="https://images.unsplash.com/photo-1527613426441-4da17471b66d?auto=format&fit=crop&q=80&w=600"
+                src="steam-bath.webp"
                 alt="Doctor consulting patient"
                 className="w-full h-full object-cover pointer-events-none"
               />
@@ -881,13 +883,13 @@ ${bookingData.message && bookingData.message.trim() ? `- Description: ${bookingD
               </div>
             </div>
 
-            {/* Doctor 2: Dr. Lijomon MJ */}
+            {/* Doctor 2: Mr. Lijomon MJ */}
             <div className="flex flex-col sm:flex-row bg-white p-5 rounded-[2.2rem] border border-[#00C7A0]/10 shadow-xl hover:shadow-2xl transition-all duration-300 max-w-[540px] mx-auto w-full gap-5 items-stretch">
               {/* Doctor Portrait Frame */}
               <div className="relative w-full sm:w-[42%] aspect-[4/5] sm:aspect-auto rounded-[1.8rem] bg-gradient-to-tr from-[#00C7A0]/15 to-[#0088A9]/15 overflow-hidden shadow-md border-4 border-white shrink-0 min-h-[360px]">
                 <img
                   src="/Dr.Lijomon M J.webp?auto=format&fit=crop&q=80&w=800"
-                  alt="Dr. Lijomon MJ (Chiropractor)"
+                  alt="Mr. Lijomon MJ (Chiropractor)"
                   className="w-full h-full object-cover pointer-events-none hover:scale-103 transition-transform duration-500"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0088A9]/10 to-transparent pointer-events-none" />
@@ -900,7 +902,7 @@ ${bookingData.message && bookingData.message.trim() ? `- Description: ${bookingD
                     Lead Spine Chiropractor
                   </span>
                   <h3 className="font-serif text-xl md:text-2xl font-extrabold text-[#17332E] leading-tight">
-                    Dr. Lijomon MJ (Chiropractor)
+                    Mr. Lijomon MJ (Chiropractor)
                   </h3>
                 </div>
 

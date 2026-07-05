@@ -5,11 +5,11 @@ import SEO from "../seo/SEO";
 const About = () => {
   const team = [
     {
-      name: "Dr. Lijomon MJ",
+      name: "Mr. Lijomon MJ",
       role: "Lead Spine Chiropractor",
       qual: "Diploma in Marma and Massage, USA-trained spinal manipulation",
       exp: "5+ Years Experience",
-      desc: "Dr. Lijomon MJ leads spine, joint, posture, and pain-management consultations at Chiro Care. His work focuses on structural assessment, chiropractic alignment, Ayurvedic marma support, and practical recovery planning for chronic pain patients.",
+      desc: "Mr Lijomon MJ leads spine, joint, posture, and pain-management consultations at Chiro Care. His work focuses on structural assessment, chiropractic alignment, Ayurvedic marma support, and practical recovery planning for chronic pain patients.",
       avatar: "https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&q=80&w=600"
     },
     {
