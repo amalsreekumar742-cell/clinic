@@ -3,4 +3,4 @@ Allow: /
 Disallow: /src/
 Disallow: /node_modules/
 
-Sitemap: https://chirocareclinic.in/sitemap.xml
+Sitemap: https://chirocare.co.in/sitemap.xml

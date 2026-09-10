@@ -2,7 +2,7 @@ import { blogs } from "../data/blogs";
 import { services } from "../data/services";
 import { treatments } from "../data/treatments";
 
-export const SITE_URL = "https://chirocareclinic.in";
+export const SITE_URL = "https://chirocare.co.in";
 export const SITE_NAME = "Chiro Care Ayurvedic Clinic";
 export const DEFAULT_IMAGE = `${SITE_URL}/logo.png`;
 

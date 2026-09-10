@@ -6,7 +6,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const rootDir = join(__dirname, "..");
 const distDir = join(rootDir, "dist");
 const sourceHtml = await readFile(join(distDir, "index.html"), "utf8");
-const siteUrl = "https://chirocareclinic.in";
+const siteUrl = "https://chirocare.co.in";
 const siteName = "Chiro Care Ayurvedic Clinic";
 const today = "2026-07-01";
 
@@ -159,3 +159,30 @@ for (const [path, title, description, type] of pages) {
 }
 
 console.log(`SEO prerendered ${pages.length} routes.`);
+
+const sitemapRoutes = [
+  { path: "/", priority: "1.0", changefreq: "weekly" },
+  { path: "/about", priority: "0.8", changefreq: "monthly" },
+  { path: "/services", priority: "0.9", changefreq: "weekly" },
+  { path: "/treatments", priority: "0.9", changefreq: "weekly" },
+  { path: "/gallery", priority: "0.6", changefreq: "monthly" },
+  { path: "/contact", priority: "0.9", changefreq: "monthly" },
+  { path: "/blog", priority: "0.7", changefreq: "weekly" },
+  ...services.map(([slug]) => ({ path: `/services/${slug}`, priority: "0.85", changefreq: "monthly" })),
+  ...treatments.map(([slug]) => ({ path: `/treatments/${slug}`, priority: "0.8", changefreq: "monthly" })),
+  ...blogs.map(([slug]) => ({ path: `/blog/${slug}`, priority: "0.65", changefreq: "monthly" })),
+];
+
+const sitemapXml = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${sitemapRoutes
+  .map(
+    (r) =>
+      `  <url><loc>${siteUrl}${r.path === "/" ? "/" : r.path}</loc><lastmod>${today}</lastmod><changefreq>${r.changefreq}</changefreq><priority>${r.priority}</priority></url>`
+  )
+  .join("\n")}
+</urlset>\n`;
+
+await writeFile(join(distDir, "sitemap.xml"), sitemapXml, "utf8");
+await writeFile(join(rootDir, "public", "sitemap.xml"), sitemapXml, "utf8");
+console.log(`Generated sitemap.xml with ${sitemapRoutes.length} URLs using ${siteUrl}.`);

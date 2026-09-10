@@ -352,7 +352,7 @@ ${bookingData.message && bookingData.message.trim() ? `- Description: ${bookingD
       <SEO
         title="Best Ayurvedic Clinic in Kerala for Back Pain & Panchakarma"
         description="Chiro Care Ayurvedic Clinic in Kaloor, Ernakulam combines Ayurveda-informed chiropractic care, Panchakarma therapies, and non-surgical pain relief for back pain, migraine, sciatica, disc problems, and joint pain."
-        canonicalPath=""
+        canonicalPath="/"
         schemas={[getFaqSchema()]}
       />
 

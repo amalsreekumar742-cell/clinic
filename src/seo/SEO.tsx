@@ -28,7 +28,13 @@ const SEO = ({
   blogData = null,
   schemas = []
 }: SEOProps) => {
-  const canonicalUrl = `${SITE_URL}${canonicalPath}`;
+  const normalizedPath =
+    canonicalPath === "" || canonicalPath === "/"
+      ? "/"
+      : canonicalPath.startsWith("/")
+      ? canonicalPath
+      : `/${canonicalPath}`;
+  const canonicalUrl = `${SITE_URL}${normalizedPath}`;
   const fullTitle = title.includes(SITE_NAME) ? title : `${title} | ${SITE_NAME}`;
   const schemaGraph = [getClinicSchema(description, ogImage), ...schemas];
 
