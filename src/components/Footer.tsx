@@ -38,28 +38,35 @@ const Footer = () => {
   ];
 
   const quickLinks = [
-    { name: "Home", path: "/#hero" },
-    { name: "About Chiro Care", path: "/#about" },
-    { name: "Meet Our Doctor", path: "/#doctor" },
-    { name: "Ayurvedic Treatments", path: "/treatments" },
-    { name: "Health Blog", path: "/blog" },
+    { name: "Home", section: "hero", path: "/" },
+    { name: "About Chiro Care", section: "about", path: "/" },
+    { name: "Services", section: "services", path: "/" },
+    { name: "Meet Our Doctor", section: "doctor", path: "/" },
     { name: "Clinic Gallery", path: "/gallery" },
-    { name: "Contact Page", path: "/contact" }
+    { name: "Health Blog", path: "/blog" },
+    { name: "Contact", section: "contact", path: "/" }
   ];
 
-  const handleLinkClick = (path: string) => {
-    if (path.startsWith("/#")) {
-      const id = path.replace(/^\/#/, "");
-      const element = document.getElementById(id);
-      if (element) {
-        const offset = 80;
-        const elementPosition = element.getBoundingClientRect().top + window.scrollY;
-        const offsetPosition = elementPosition - offset;
-        window.scrollTo({
-          top: offsetPosition,
-          behavior: "smooth"
-        });
+  const handleLinkClick = (e: React.MouseEvent, link: { name: string; section?: string; path: string }) => {
+    if (link.section) {
+      if (window.location.pathname === "/") {
+        e.preventDefault();
+        if (link.section === "hero") {
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        } else {
+          const element = document.getElementById(link.section);
+          if (element) {
+            const offset = 80;
+            const elementPosition = element.getBoundingClientRect().top + window.scrollY;
+            window.scrollTo({
+              top: elementPosition - offset,
+              behavior: "smooth"
+            });
+          }
+        }
       }
+    } else if (window.location.pathname === link.path) {
+      window.scrollTo({ top: 0, behavior: "smooth" });
     }
   };
 
@@ -109,7 +116,7 @@ const Footer = () => {
             </h3>
             <div className="flex flex-col gap-3 text-xs text-[#EEF8F6]/80 font-medium">
               <a
-                href="https://www.google.com/maps/search/?api=1&query=Metro+Pillar+567%2C+Banerji+Rd%2C+Kaloor%2C+Ernakulam%2C+Kochi%2C+Kerala+682017"
+                href="https://www.google.com/maps/place/Chiro+Care+Ayurveda+Treatment+Centre+Kochi/@9.995452,76.2966425,17z/data=!3m1!4b1!4m6!3m5!1s0x3b080de7495059df:0x5dd2d9429acba5d8!8m2!3d9.995452!4d76.2966425!16s%2Fg%2F11zc_bh_5g"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-start gap-2 hover:text-[#00C7A0] transition-colors"
@@ -150,7 +157,8 @@ const Footer = () => {
                 <li key={idx}>
                   <Link
                     to={link.path}
-                    onClick={() => handleLinkClick(link.path)}
+                    state={link.section ? { scrollTo: link.section } : undefined}
+                    onClick={(e) => handleLinkClick(e, link)}
                     className="hover:text-[#00C7A0] transition-colors flex items-center gap-1.5"
                   >
                     <ArrowRight className="w-3 h-3 text-[#00C7A0] shrink-0" />

@@ -12,39 +12,41 @@ const MainLayout = () => {
   const [isLoading] = useState(false);
   const location = useLocation();
 
-  // Robust Scroll-to-Hash handler with offset and loading screen wait
+  // Clean scroll handler and cross-page section scrolling without hash
   useEffect(() => {
     if (isLoading) return;
 
-    let timer: ReturnType<typeof setTimeout> | undefined;
-
-    const scrollToHash = () => {
-      if (location.hash) {
-        const id = location.hash.replace(/^\/?#/, "");
-        const element = document.getElementById(id);
+    const targetSection = (location.state as any)?.scrollTo;
+    if (targetSection && location.pathname === "/") {
+      const timer = setTimeout(() => {
+        const element = document.getElementById(targetSection);
         if (element) {
-          const offset = 80; // Navbar height
+          const offset = 80;
           const elementPosition = element.getBoundingClientRect().top + window.scrollY;
-          const offsetPosition = elementPosition - offset;
-
           window.scrollTo({
-            top: offsetPosition,
+            top: elementPosition - offset,
             behavior: "smooth"
           });
-        } else {
-          // Retry if DOM elements are still rendering
-          timer = setTimeout(scrollToHash, 100);
         }
-      } else {
-        window.scrollTo({ top: 0, behavior: "smooth" });
+      }, 100);
+      return () => clearTimeout(timer);
+    } else if (location.hash) {
+      const id = location.hash.replace(/^\/?#/, "");
+      const element = document.getElementById(id);
+      if (element) {
+        const offset = 80;
+        const elementPosition = element.getBoundingClientRect().top + window.scrollY;
+        window.scrollTo({
+          top: elementPosition - offset,
+          behavior: "smooth"
+        });
       }
-    };
-
-    timer = setTimeout(scrollToHash, 150);
-    return () => {
-      if (timer) clearTimeout(timer);
-    };
-  }, [location.pathname, location.hash, isLoading]);
+      // Strip any hash from browser address bar for clean canonical URLs
+      window.history.replaceState(null, "", window.location.pathname + window.location.search);
+    } else {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  }, [location.pathname, location.hash, location.state, isLoading]);
 
   return (
     <div className="relative min-h-screen bg-[#F8FCFB] text-[#17332E] font-sans flex flex-col overflow-x-hidden">

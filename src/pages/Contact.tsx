@@ -113,7 +113,7 @@ ${formData.message && formData.message.trim() ? `- Description: ${formData.messa
 
             <div className="flex flex-col gap-5">
               <a
-                href="https://www.google.com/maps/search/?api=1&query=Metro+Pillar+567%2C+Banerji+Rd%2C+Kaloor%2C+Ernakulam%2C+Kochi%2C+Kerala+682017"
+                href="https://www.google.com/maps/place/Chiro+Care+Ayurveda+Treatment+Centre+Kochi/@9.995452,76.2966425,17z/data=!3m1!4b1!4m6!3m5!1s0x3b080de7495059df:0x5dd2d9429acba5d8!8m2!3d9.995452!4d76.2966425!16s%2Fg%2F11zc_bh_5g"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex gap-4 items-start text-xs md:text-sm text-[#17332E]/80 font-bold hover:opacity-85 transition-opacity"
@@ -332,19 +332,26 @@ ${formData.message && formData.message.trim() ? `- Description: ${formData.messa
             </div>
 
             {/* Map wrapper */}
-            <div className="rounded-[2.5rem] overflow-hidden border border-[#00C7A0]/15 relative h-64 bg-[#EEF8F6] flex items-center justify-center shadow-lg">
-              <div className="absolute inset-0 bg-cover bg-center opacity-65" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1524661135-423995f22d0b?auto=format&fit=crop&q=80&w=800')" }} />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0088A9]/20 to-transparent pointer-events-none" />
-              <div className="relative glass-card border border-white/60 p-6 rounded-2xl flex flex-col items-center gap-2 text-center max-w-xs shadow-md">
-                <MapPin className="w-7 h-7 text-[#0088A9]" />
-                <h4 className="font-serif font-black text-[#17332E] text-sm">Interactive Map Location</h4>
+            <div className="rounded-[2.5rem] overflow-hidden border border-[#00C7A0]/15 relative min-h-[340px] bg-[#EEF8F6] shadow-lg flex flex-col">
+              <iframe
+                title="Chiro Care Clinic Location Map"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3929.351052673322!2d76.2966425!3d9.995452!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b080de7495059df%3A0x5dd2d9429acba5d8!2sChiro%20Care%20Ayurveda%20Treatment%20Centre%20Kochi!5e0!3m2!1sen!2sin!4v1726814768000!5m2!1sen!2sin"
+                className="w-full h-72 sm:h-80 border-0"
+                allowFullScreen={true}
+                loading="lazy"
+              ></iframe>
+              <div className="p-4 bg-white/90 backdrop-blur-sm border-t border-[#00C7A0]/10 flex flex-col sm:flex-row items-center justify-between gap-3">
+                <div className="flex items-center gap-2 text-left">
+                  <MapPin className="w-4 h-4 text-[#0088A9] shrink-0" />
+                  <span className="text-xs font-bold text-[#17332E]">Chiro Care Ayurveda Treatment Centre Kochi</span>
+                </div>
                 <a
-                  href="https://www.google.com/maps/search/?api=1&query=Metro+Pillar+567%2C+Banerji+Rd%2C+Kaloor%2C+Ernakulam%2C+Kochi%2C+Kerala+682017"
+                  href="https://www.google.com/maps/place/Chiro+Care+Ayurveda+Treatment+Centre+Kochi/@9.995452,76.2966425,17z/data=!3m1!4b1!4m6!3m5!1s0x3b080de7495059df:0x5dd2d9429acba5d8!8m2!3d9.995452!4d76.2966425!16s%2Fg%2F11zc_bh_5g"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bg-gradient-to-r from-[#00C7A0] to-[#0088A9] text-white px-5 py-2.5 rounded-full text-[10px] font-bold transition-all mt-2"
+                  className="bg-gradient-to-r from-[#00C7A0] to-[#0088A9] text-white px-4 py-2 rounded-full text-[11px] font-bold transition-all shadow-sm hover:opacity-95 shrink-0"
                 >
-                  Get Directions in Google Maps
+                  Get Directions in Google Maps →
                 </a>
               </div>
             </div>

@@ -16,8 +16,12 @@ export const clinicContact = {
   region: "Kerala",
   postalCode: "682017",
   country: "IN",
-  latitude: 10.003362,
-  longitude: 76.299104,
+  latitude: 9.995452,
+  longitude: 76.2966425,
+  googleMapsUrl:
+    "https://www.google.com/maps/place/Chiro+Care+Ayurveda+Treatment+Centre+Kochi/@9.995452,76.2966425,17z/data=!3m1!4b1!4m6!3m5!1s0x3b080de7495059df:0x5dd2d9429acba5d8!8m2!3d9.995452!4d76.2966425!16s%2Fg%2F11zc_bh_5g",
+  googleMapsEmbedUrl:
+    "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3929.351052673322!2d76.2966425!3d9.995452!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b080de7495059df%3A0x5dd2d9429acba5d8!2sChiro%20Care%20Ayurveda%20Treatment%20Centre%20Kochi!5e0!3m2!1sen!2sin!4v1726814768000!5m2!1sen!2sin",
 };
 
 export const faqs = [
@@ -94,6 +98,7 @@ export const getClinicSchema = (description: string, image = DEFAULT_IMAGE) => (
     latitude: clinicContact.latitude,
     longitude: clinicContact.longitude,
   },
+  hasMap: clinicContact.googleMapsUrl,
   openingHoursSpecification: [
     {
       "@type": "OpeningHoursSpecification",

@@ -1,14 +1,21 @@
 import React, { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Phone, Calendar } from "lucide-react";
 import Logo from "./Logo";
 
+interface NavLinkItem {
+  name: string;
+  section?: string;
+  path: string;
+}
+
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [activeHash, setActiveHash] = useState("#hero");
+  const [activeSection, setActiveSection] = useState("hero");
   const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -18,9 +25,10 @@ const Navbar = () => {
         setIsScrolled(false);
       }
 
+      // Track active section on homepage without modifying browser URL
       if (window.location.pathname === "/") {
-        const sections = ["hero", "about", "services", "doctor", "contact"];
-        const scrollPosition = window.scrollY + 120;
+        const sections = ["hero", "services", "about", "doctor", "contact"];
+        const scrollPosition = window.scrollY + 140;
 
         for (const section of sections) {
           const el = document.getElementById(section);
@@ -28,7 +36,7 @@ const Navbar = () => {
             const top = el.offsetTop;
             const height = el.offsetHeight;
             if (scrollPosition >= top && scrollPosition < top + height) {
-              setActiveHash(`#${section}`);
+              setActiveSection(section);
               break;
             }
           }
@@ -36,35 +44,22 @@ const Navbar = () => {
       }
     };
 
-    const handleHashChange = () => {
-      if (window.location.hash) {
-        setActiveHash(window.location.hash);
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    window.addEventListener("hashchange", handleHashChange);
-
-    if (window.location.hash) {
-      setActiveHash(window.location.hash);
-    } else {
-      handleScroll();
-    }
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("hashchange", handleHashChange);
     };
   }, []);
 
-  const navLinks = [
-    { name: "Home", path: "/#hero" },
-    { name: "Services", path: "/#services" },
-    { name: "About", path: "/#about" },
-    { name: "Doctor", path: "/#doctor" },
+  const navLinks: NavLinkItem[] = [
+    { name: "Home", section: "hero", path: "/" },
+    { name: "Services", section: "services", path: "/" },
+    { name: "About", section: "about", path: "/" },
+    { name: "Doctor", section: "doctor", path: "/" },
     { name: "Gallery", path: "/gallery" },
     { name: "Blog", path: "/blog" },
-    { name: "Contact", path: "/#contact" }
+    { name: "Contact", section: "contact", path: "/" }
   ];
 
   const handleBookClick = () => {
@@ -72,22 +67,35 @@ const Navbar = () => {
     setIsOpen(false);
   };
 
-  const handleLinkClick = (e: React.MouseEvent, path: string) => {
+  const handleLinkClick = (e: React.MouseEvent, link: NavLinkItem) => {
     setIsOpen(false);
-    if (location.pathname === "/" && path.startsWith("/#")) {
-      const id = path.replace(/^\/#/, "");
-      const element = document.getElementById(id);
-      if (element) {
-        e.preventDefault();
-        const offset = 80;
-        const elementPosition = element.getBoundingClientRect().top + window.scrollY;
-        const offsetPosition = elementPosition - offset;
-        window.scrollTo({
-          top: offsetPosition,
-          behavior: "smooth"
-        });
-        window.history.pushState(null, "", path);
-        setActiveHash(`#${id}`);
+
+    if (link.section) {
+      e.preventDefault();
+      if (location.pathname === "/") {
+        // Already on home page: smooth scroll to section without touching URL hash
+        if (link.section === "hero") {
+          window.scrollTo({ top: 0, behavior: "smooth" });
+          setActiveSection("hero");
+        } else {
+          const element = document.getElementById(link.section);
+          if (element) {
+            const offset = 80;
+            const elementPosition = element.getBoundingClientRect().top + window.scrollY;
+            window.scrollTo({
+              top: elementPosition - offset,
+              behavior: "smooth"
+            });
+            setActiveSection(link.section);
+          }
+        }
+      } else {
+        // On another page: navigate to home page and pass target section in state
+        navigate("/", { state: { scrollTo: link.section } });
+      }
+    } else {
+      if (location.pathname === link.path) {
+        window.scrollTo({ top: 0, behavior: "smooth" });
       }
     }
   };
@@ -104,7 +112,11 @@ const Navbar = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
           <div className="flex items-center justify-between h-full">
             {/* Logo Component */}
-            <Link to="/" className="group flex items-center">
+            <Link
+              to="/"
+              onClick={(e) => handleLinkClick(e, { name: "Home", section: "hero", path: "/" })}
+              className="group flex items-center"
+            >
               <Logo className="h-10 md:h-[48px]" />
             </Link>
 
@@ -112,17 +124,16 @@ const Navbar = () => {
             <div className="hidden lg:flex items-center gap-10">
               <div className="flex items-center gap-8">
                 {navLinks.map((link) => {
-                  const isHashLink = link.path.includes("#");
-                  const isActive = isHashLink
-                    ? (location.pathname === "/" && activeHash === link.path.substring(link.path.indexOf("#")))
-                    : location.pathname === link.path;
-                  
+                  const isActive = link.section
+                    ? location.pathname === "/" && activeSection === link.section
+                    : location.pathname.startsWith(link.path);
+
                   return (
                     <Link
                       key={link.name}
                       to={link.path}
-                      onClick={(e) => handleLinkClick(e, link.path)}
-                      className={`relative font-sans text-sm tracking-wide transition-all duration-300 py-1.5 ${
+                      onClick={(e) => handleLinkClick(e, link)}
+                      className={`relative font-sans text-sm tracking-wide transition-all duration-300 py-1.5 cursor-pointer ${
                         isActive
                           ? "text-[#0088A9] font-black"
                           : "text-[#17332E]/60 hover:text-[#0088A9] font-bold"
@@ -150,7 +161,7 @@ const Navbar = () => {
                   <Phone className="w-3.5 h-3.5 text-[#00C7A0]" />
                   +91 6282018754
                 </a>
-                
+
                 <button
                   onClick={handleBookClick}
                   className="btn-premium flex items-center gap-2 bg-gradient-to-r from-[#00C7A0] to-[#0088A9] text-white text-xs uppercase tracking-widest font-extrabold px-6 py-3.5 rounded-full shadow-[0_4px_15px_rgba(0,199,160,0.25)] hover:shadow-[0_8px_25px_rgba(0,199,160,0.45)] transition-all duration-300 cursor-pointer"
@@ -192,19 +203,16 @@ const Navbar = () => {
           >
             <div className="px-5 pt-4 pb-8 space-y-3">
               {navLinks.map((link) => {
-                const isHashLink = link.path.includes("#");
-                const isActive = isHashLink
-                  ? (location.pathname === "/" && activeHash === link.path.substring(link.path.indexOf("#")))
-                  : location.pathname === link.path;
-                
+                const isActive = link.section
+                  ? location.pathname === "/" && activeSection === link.section
+                  : location.pathname.startsWith(link.path);
+
                 return (
                   <Link
                     key={link.name}
                     to={link.path}
-                    onClick={(e) => {
-                      handleLinkClick(e, link.path);
-                    }}
-                    className={`block px-4 py-3 rounded-xl font-bold tracking-wide transition-all ${
+                    onClick={(e) => handleLinkClick(e, link)}
+                    className={`block px-4 py-3 rounded-xl font-bold tracking-wide transition-all cursor-pointer ${
                       isActive
                         ? "bg-gradient-to-r from-[#00C7A0] to-[#0088A9] text-white shadow-md shadow-[#00C7A0]/10"
                         : "text-[#17332E]/80 hover:bg-[#EEF8F6] hover:text-[#0088A9]"
@@ -214,7 +222,7 @@ const Navbar = () => {
                   </Link>
                 );
               })}
-              
+
               <div className="pt-4 border-t border-[#EEF8F6] flex flex-col gap-3">
                 <a
                   href="tel:+916282018754"

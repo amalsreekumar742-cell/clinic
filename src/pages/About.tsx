@@ -10,7 +10,7 @@ const About = () => {
       qual: "Diploma in Marma and Massage, USA-trained spinal manipulation",
       exp: "5+ Years Experience",
       desc: "Mr Lijomon MJ leads spine, joint, posture, and pain-management consultations at Chiro Care. His work focuses on structural assessment, chiropractic alignment, Ayurvedic marma support, and practical recovery planning for chronic pain patients.",
-      avatar: "https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&q=80&w=600"
+      avatar: "/Dr.Lijomon M J.webp"
     },
     {
       name: "Dr. Neena James",
@@ -89,8 +89,8 @@ const About = () => {
               className="relative w-full max-w-[420px] aspect-[4/5] rounded-[3rem] overflow-hidden shadow-2xl border-4 border-white"
             >
               <img
-                src="https://images.unsplash.com/photo-1598256989800-fe5f95da9787?auto=format&fit=crop&q=80&w=600"
-                alt="Clinic Treatment Setup"
+                src="/gallery/chiropractic-treatment-room-adjustment-table-kaloor.webp"
+                alt="Chiro Care Clinic private treatment room with chiropractic adjustment table in Kaloor Kochi"
                 loading="lazy"
                 decoding="async"
                 className="w-full h-full object-cover pointer-events-none"

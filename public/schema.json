@@ -21,9 +21,10 @@
   },
   "geo": {
     "@type": "GeoCoordinates",
-    "latitude": 10.003362,
-    "longitude": 76.299104
+    "latitude": 9.995452,
+    "longitude": 76.2966425
   },
+  "hasMap": "https://www.google.com/maps/place/Chiro+Care+Ayurveda+Treatment+Centre+Kochi/@9.995452,76.2966425,17z/data=!3m1!4b1!4m6!3m5!1s0x3b080de7495059df:0x5dd2d9429acba5d8!8m2!3d9.995452!4d76.2966425!16s%2Fg%2F11zc_bh_5g",
   "openingHoursSpecification": [
     {
       "@type": "OpeningHoursSpecification",

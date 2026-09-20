@@ -72,9 +72,10 @@ const localSchema = {
   },
   geo: {
     "@type": "GeoCoordinates",
-    latitude: 10.003362,
-    longitude: 76.299104,
+    latitude: 9.995452,
+    longitude: 76.2966425,
   },
+  hasMap: "https://www.google.com/maps/place/Chiro+Care+Ayurveda+Treatment+Centre+Kochi/@9.995452,76.2966425,17z/data=!3m1!4b1!4m6!3m5!1s0x3b080de7495059df:0x5dd2d9429acba5d8!8m2!3d9.995452!4d76.2966425!16s%2Fg%2F11zc_bh_5g",
 };
 
 const escapeHtml = (value) =>
@@ -127,6 +128,8 @@ const detailBody = ({ title, description, eyebrow, items }) => `
   </main>`;
 
 const pages = [
+  ["/about", "About Chiro Care Ayurvedic Clinic in Kaloor Ernakulam", "Learn about Chiro Care Ayurvedic Clinic, lead chiropractor Lijomon MJ, Dr. Neena James, and our integrative approach to spine and joint health.", "AboutPage"],
+  ["/gallery", "Clinic & Treatment Gallery in Kaloor Kochi", "View photos of Chiro Care Ayurvedic Clinic in Kaloor, Kochi. Real images of our treatment rooms, chiropractic adjustments, Kizhi therapy, cupping, and consultation.", "ImageGallery"],
   ["/contact", "Contact Ayurvedic Clinic in Kaloor Ernakulam", "Book an appointment at Chiro Care Ayurvedic Clinic in Kaloor, Ernakulam. Get directions, phone numbers, WhatsApp booking, clinic address, and working hours.", "ContactPage"],
   ["/services", "Ayurvedic Pain Treatment Services in Kerala", "Browse Ayurveda-informed chiropractic services for migraine, back pain, sciatica, disc problems, shoulder pain, cervical spondylosis, and joint pain.", "CollectionPage"],
   ["/treatments", "Panchakarma and Ayurvedic Treatments in Kerala", "Explore Ayurvedic therapies including Panchakarma, Shirodhara, Abhyanga, Kizhi, Nasya, detox programs, and weight management.", "CollectionPage"],

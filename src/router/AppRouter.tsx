@@ -21,15 +21,6 @@ const PageLoader = () => (
   </div>
 );
 
-// Redirect sub-paths to the main landing page hash section
-const RedirectToHash = ({ hash }: { hash: string }) => {
-  const navigate = useNavigate();
-  useEffect(() => {
-    navigate(`/#${hash}`, { replace: true });
-  }, [navigate, hash]);
-  return null;
-};
-
 const AppRouter = () => {
   return (
     <Suspense fallback={<PageLoader />}>
@@ -48,8 +39,8 @@ const AppRouter = () => {
           <Route path="blog/:slug" element={<BlogPost />} />
           <Route path="contact" element={<Contact />} />
 
-          {/* Legacy hash-only section aliases */}
-          <Route path="doctor" element={<RedirectToHash hash="doctor" />} />
+          {/* Clean route alias */}
+          <Route path="doctor" element={<Navigate to="/about" replace />} />
           
           {/* Fallback redirect to home page */}
           <Route path="*" element={<Navigate to="/" replace />} />

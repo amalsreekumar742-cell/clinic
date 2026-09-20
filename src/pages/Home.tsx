@@ -466,16 +466,24 @@ ${bookingData.message && bookingData.message.trim() ? `- Description: ${bookingD
                 <Calendar className="w-4 h-4" />
                 Book Appointment
               </button>
-              <a
-                href="#services"
-                className="flex items-center justify-center gap-2 text-xs uppercase tracking-widest font-extrabold px-9 py-4 rounded-full transition-all duration-300"
+              <button
+                type="button"
+                onClick={() => {
+                  const el = document.getElementById("services");
+                  if (el) {
+                    const offset = 80;
+                    const pos = el.getBoundingClientRect().top + window.scrollY;
+                    window.scrollTo({ top: pos - offset, behavior: "smooth" });
+                  }
+                }}
+                className="flex items-center justify-center gap-2 text-xs uppercase tracking-widest font-extrabold px-9 py-4 rounded-full transition-all duration-300 cursor-pointer"
                 style={{ border: "1.5px solid rgba(0,199,160,0.35)", color: "rgba(0,199,160,0.9)", background: "rgba(0,199,160,0.05)" }}
                 onMouseEnter={e => { e.currentTarget.style.background = "rgba(0,199,160,0.12)"; e.currentTarget.style.borderColor = "rgba(0,199,160,0.6)"; }}
                 onMouseLeave={e => { e.currentTarget.style.background = "rgba(0,199,160,0.05)"; e.currentTarget.style.borderColor = "rgba(0,199,160,0.35)"; }}
               >
                 View Services
                 <ArrowRight className="w-4 h-4" />
-              </a>
+              </button>
             </motion.div>
 
             {/* Trust mini-strip */}
@@ -968,7 +976,7 @@ ${bookingData.message && bookingData.message.trim() ? `- Description: ${bookingD
             <div className="lg:col-span-5 flex flex-col gap-6 lg:justify-between justify-start text-left">
               <div className="flex flex-col gap-4">
                 <a
-                  href="https://maps.google.com/?q=10.003362,76.299104"
+                  href="https://www.google.com/maps/place/Chiro+Care+Ayurveda+Treatment+Centre+Kochi/@9.995452,76.2966425,17z/data=!3m1!4b1!4m6!3m5!1s0x3b080de7495059df:0x5dd2d9429acba5d8!8m2!3d9.995452!4d76.2966425!16s%2Fg%2F11zc_bh_5g"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-start gap-3.5 bg-[#EEF8F6]/40 p-4.5 rounded-2xl border border-[#00C7A0]/5 hover:bg-[#EEF8F6]/75 transition-colors cursor-pointer group"
@@ -1037,7 +1045,7 @@ ${bookingData.message && bookingData.message.trim() ? `- Description: ${bookingD
               {/* Working Google Map Embed Frame */}
               <iframe
                 title="Chiro Care Clinic Location Map"
-                src="https://maps.google.com/maps?q=10.003362,76.299104&z=17&output=embed"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3929.351052673322!2d76.2966425!3d9.995452!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b080de7495059df%3A0x5dd2d9429acba5d8!2sChiro%20Care%20Ayurveda%20Treatment%20Centre%20Kochi!5e0!3m2!1sen!2sin!4v1726814768000!5m2!1sen!2sin"
                 className="w-full h-full border-0 min-h-[350px]"
                 allowFullScreen={true}
                 loading="lazy"
