@@ -11,22 +11,24 @@ const Services = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
 
-  const categories = ["All", "Spine & Disc", "Head & Neck", "Joints & Muscles", ];
+  const categories = ["All", "Spine & Disc", "Head & Neck", "Joints & Muscles", "Wellness & Support"];
 
   // Helper function to match categories
   const matchesCategory = (service: Service, category: string) => {
     const spineDiscIds = [3, 5, 6, 7, 9, 19]; // Disc Problems, Sciatica, Scoliosis, Leg Length, Whole Back Pain, Slip Disc
-    const headNeckIds = [1, 2, 8, 11];        // Migraine, Headache, Cervical Spondylosis, Neck Pain (Removed 17: Facial Paralysis Support)
+    const headNeckIds = [1, 2, 8, 11];        // Migraine, Headache, Cervical Spondylosis, Neck Pain
     const jointsMusclesIds = [4, 10, 12, 13, 16]; // Shoulder, Joint Pain, Arthritis, Sports Injury, Knee Pain
+    const wellnessSupportIds = [14, 15, 18];  // Stress & Anxiety, Weight Loss, Parkinson Support
 
     if (category === "All") {
-      const activeIds = [...spineDiscIds, ...headNeckIds, ...jointsMusclesIds];
+      const activeIds = [...spineDiscIds, ...headNeckIds, ...jointsMusclesIds, ...wellnessSupportIds];
       return activeIds.includes(service.id);
     }
 
     if (category === "Spine & Disc") return spineDiscIds.includes(service.id);
     if (category === "Head & Neck") return headNeckIds.includes(service.id);
     if (category === "Joints & Muscles") return jointsMusclesIds.includes(service.id);
+    if (category === "Wellness & Support") return wellnessSupportIds.includes(service.id);
     return false;
   };
 

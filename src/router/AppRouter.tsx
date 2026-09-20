@@ -13,6 +13,7 @@ const Gallery = lazy(() => import("../pages/Gallery"));
 const Blog = lazy(() => import("../pages/Blog"));
 const BlogPost = lazy(() => import("../pages/BlogPost"));
 const Contact = lazy(() => import("../pages/Contact"));
+const NotFound = lazy(() => import("../pages/NotFound"));
 
 // Page transition chunk loading spinner
 const PageLoader = () => (
@@ -39,11 +40,12 @@ const AppRouter = () => {
           <Route path="blog/:slug" element={<BlogPost />} />
           <Route path="contact" element={<Contact />} />
 
-          {/* Clean route alias */}
+          {/* Clean route alias & legacy redirect */}
           <Route path="doctor" element={<Navigate to="/about" replace />} />
+          <Route path="treatments/abhayanga" element={<Navigate to="/treatments/abhyanga" replace />} />
           
-          {/* Fallback redirect to home page */}
-          <Route path="*" element={<Navigate to="/" replace />} />
+          {/* 404 Route */}
+          <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
     </Suspense>

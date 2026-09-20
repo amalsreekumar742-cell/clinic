@@ -29,18 +29,20 @@ const YoutubeIcon = ({ className }: SocialIconProps) => (
 
 const Footer = () => {
   const servicesLinks = [
-    { name: "Migraine Treatment", path: "/services/migraine-treatment" },
-    { name: "Sciatica Relief", path: "/services/sciatica" },
-    { name: "Disc Problems", path: "/services/disc-problems" },
-    { name: "Cervical Spondylosis", path: "/services/cervical-spondylosis" },
     { name: "Whole Back Pain", path: "/services/whole-back-pain" },
-    { name: "Panchakarma", path: "/treatments/panchakarma" }
+    { name: "Sciatica Treatment", path: "/services/sciatica" },
+    { name: "Cervical Spondylosis", path: "/services/cervical-spondylosis" },
+    { name: "Knee Pain Relief", path: "/services/knee-pain" },
+    { name: "Disc Problems", path: "/services/disc-problems" },
+    { name: "Migraine Treatment", path: "/services/migraine-treatment" },
+    { name: "All Clinical Services", path: "/services" }
   ];
 
   const quickLinks = [
     { name: "Home", section: "hero", path: "/" },
     { name: "About Chiro Care", section: "about", path: "/" },
     { name: "Services", section: "services", path: "/" },
+    { name: "Ayurvedic Treatments", path: "/treatments" },
     { name: "Meet Our Doctor", section: "doctor", path: "/" },
     { name: "Clinic Gallery", path: "/gallery" },
     { name: "Health Blog", path: "/blog" },
@@ -98,7 +100,7 @@ const Footer = () => {
                 <li key={idx}>
                   <Link
                     to={link.path}
-                    onClick={() => handleLinkClick(link.path)}
+                    onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
                     className="hover:text-[#00C7A0] transition-colors flex items-center gap-1.5"
                   >
                     <ArrowRight className="w-3 h-3 text-[#00C7A0] shrink-0" />

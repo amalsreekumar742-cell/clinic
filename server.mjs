@@ -97,6 +97,23 @@ const server = http.createServer((req, res) => {
     return;
   }
 
+  // 301 Redirects for legacy typos and canonical route aliases
+  const REDIRECTS = {
+    "/treatments/abhayanga": "/treatments/abhyanga",
+    "/treatments/abhayanga/": "/treatments/abhyanga",
+    "/doctor": "/about",
+    "/doctor/": "/about",
+  };
+
+  if (REDIRECTS[pathname]) {
+    res.writeHead(301, {
+      Location: REDIRECTS[pathname],
+      "Content-Type": "text/plain; charset=utf-8",
+    });
+    res.end(`301 Moved Permanently to ${REDIRECTS[pathname]}`);
+    return;
+  }
+
   // Prevent path traversal
   const decodedPath = decodeURIComponent(pathname);
   const safeRelativePath = path.normalize(decodedPath).replace(/^(\.\.[\/\\])+/, "");
@@ -140,10 +157,16 @@ const server = http.createServer((req, res) => {
       return;
     }
 
-    // 5. Client-side route fallback -> serve dist/index.html
+    // 5. Unknown route fallback -> serve dist/404.html with true HTTP 404 status
+    const notFoundPath = path.join(DIST_DIR, "404.html");
+    if (fs.existsSync(notFoundPath)) {
+      serveFile(res, notFoundPath, 404, isHead);
+      return;
+    }
+
     const fallbackIndexPath = path.join(DIST_DIR, "index.html");
     if (fs.existsSync(fallbackIndexPath)) {
-      serveFile(res, fallbackIndexPath, 200, isHead);
+      serveFile(res, fallbackIndexPath, 404, isHead);
       return;
     }
 
